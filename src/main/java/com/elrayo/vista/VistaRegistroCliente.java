@@ -1,17 +1,20 @@
-
 package com.elrayo.vista;
+
 import com.elrayo.controlador.ControladorCliente;
 import com.elrayo.modelo.ValidadorCliente;
 import com.elrayo.entidad.Cliente;
 
-public class VistaRegistroCliente extends javax.swing.JFrame {
+public class VistaRegistroCliente extends javax.swing.JDialog {
 
-    
     public VistaRegistroCliente() {
-        initComponents();
     }
 
-   
+    public VistaRegistroCliente(java.awt.Frame parent) {
+        super(parent, true);
+        initComponents();
+        setLocationRelativeTo(parent);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -23,9 +26,9 @@ public class VistaRegistroCliente extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("REGISTRAR CLIENTE");
 
@@ -35,10 +38,10 @@ public class VistaRegistroCliente extends javax.swing.JFrame {
 
         jLabel4.setText("DIRECCION :");
 
-        jButton1.setText("Registrar Cliente");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrar.setText("Registrar Cliente");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRegistrarActionPerformed(evt);
             }
         });
 
@@ -65,7 +68,7 @@ public class VistaRegistroCliente extends javax.swing.JFrame {
                 .addContainerGap(105, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnRegistrar)
                 .addGap(140, 140, 140))
         );
         layout.setVerticalGroup(
@@ -86,30 +89,39 @@ public class VistaRegistroCliente extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
-                .addComponent(jButton1)
+                .addComponent(btnRegistrar)
                 .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String Nombre=txtNombre.getText();
-        String Telefono=txtTelefono.getText();
-        String Direccion = txtDireccion.getText();
-        if(!ValidadorCliente.esTelefonoValido(Telefono))return;
-        if(!ValidadorCliente.noVacioDireccion(Direccion))return;
-        if(!ValidadorCliente.noVacioNombre(Nombre))return;
-        
-        Cliente Cnuevos = new Cliente(Nombre, Telefono, Direccion);
-        ControladorCliente Cc= new ControladorCliente();
-        Cc.RegistrarCliente(Cnuevos);   
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        String nombre = txtNombre.getText();
+        String telefono = txtTelefono.getText();
+        String direccion = txtDireccion.getText();
+        if (!ValidadorCliente.noVacioNombre(nombre)) {
+            return;
+        }
+        if (!ValidadorCliente.esTelefonoValido(telefono)) {
+            return;
+        }
+        if (!ValidadorCliente.noVacioDireccion(direccion)) {
+            return;
+        }
+
+        Cliente nuevo = new Cliente(nombre, telefono, direccion);
+        ControladorCliente controlador = new ControladorCliente();
+        controlador.registrarCliente(nuevo);
+
         txtDireccion.setText("");
         txtNombre.setText("");
         txtTelefono.setText("");
-    }//GEN-LAST:event_jButton1ActionPerformed
 
-  
+        // OPCIONAL: cerrar la ventana al guardar
+        this.dispose();
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -143,7 +155,7 @@ public class VistaRegistroCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnRegistrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

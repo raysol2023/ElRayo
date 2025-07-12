@@ -22,7 +22,7 @@ public class ValidadorCliente {
     }
         public static boolean noVacioDireccion(String Direccion){
         if(Direccion.isEmpty()){
-            JOptionPane.showMessageDialog(null, "RELLENAR EL CAMPO DE NOMBRE");
+            JOptionPane.showMessageDialog(null, "RELLENAR EL CAMPO DE DIRECCION");
             return false;
         }
         return  true;

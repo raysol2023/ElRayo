@@ -49,7 +49,7 @@ public class VistaGestionMotorizado extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         TablaMotorizado = new javax.swing.JTable();
         btnCrear = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
 
@@ -96,10 +96,10 @@ public class VistaGestionMotorizado extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("BUSCAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setText("BUSCAR");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
@@ -127,7 +127,7 @@ public class VistaGestionMotorizado extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton2)
+                            .addComponent(btnBuscar)
                             .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEliminar))
@@ -148,7 +148,7 @@ public class VistaGestionMotorizado extends javax.swing.JFrame {
                         .addGap(37, 37, 37)
                         .addComponent(btnCrear)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnEditar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -163,7 +163,7 @@ public class VistaGestionMotorizado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
        String dniBuscar = JOptionPane.showInputDialog(this, "🔍 Ingresa el DNI del motorizado a buscar:");
 
     if (dniBuscar == null || dniBuscar.trim().isEmpty()) {
@@ -187,7 +187,7 @@ public class VistaGestionMotorizado extends javax.swing.JFrame {
     } else {
         JOptionPane.showMessageDialog(this, "❌ No se encontró el motorizado con DNI: " + dniBuscar);
     }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int fila = TablaMotorizado.getSelectedRow();
@@ -251,7 +251,7 @@ public class VistaGestionMotorizado extends javax.swing.JFrame {
     private void TablaMotorizadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMotorizadoMouseClicked
       int fila = TablaMotorizado.getSelectedRow();
     if (fila != -1) {
-        btnEditar.setEnabled(true); // o btnEliminar.setEnabled(true);
+        btnEditar.setEnabled(true); 
     }
     }//GEN-LAST:event_TablaMotorizadoMouseClicked
 
@@ -299,10 +299,10 @@ ventanaRegistro.setVisible(true);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaMotorizado;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

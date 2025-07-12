@@ -8,14 +8,16 @@ public class ControladorCliente {
 
     private ClienteDAO dao = new ClienteDAO();
 
-    public boolean RegistrarCliente(Cliente n) {
-        if (ValidadorCliente.esTelefonoValido(n.getTelefono())
-                && ValidadorCliente.noVacioNombre(n.getNombre())
-                && ValidadorCliente.noVacioDireccion(n.getDireccion())) {;
-            dao.GuardarCliente(n);
+    public boolean registrarCliente(Cliente cliente) {
+        if (
+            ValidadorCliente.esTelefonoValido(cliente.getTelefono()) &&
+            ValidadorCliente.noVacioNombre(cliente.getNombre()) &&
+            ValidadorCliente.noVacioDireccion(cliente.getDireccion())
+        ) {
+            dao.GuardarCliente(cliente);
             return true;
         }
         return false;
     }
-
 }
+
