@@ -9,8 +9,8 @@ public class Motorizado extends Persona implements IReportable {
 
     public Motorizado() {}
 
-    public Motorizado(String nombre, String telefono, String direccion, String dni, boolean activo) {
-        super(nombre, telefono, direccion);
+    public Motorizado(String dni, boolean activo, String nombre, String telefono) {
+        super(nombre, telefono);
         this.dni = dni;
         this.activo = activo;
     }

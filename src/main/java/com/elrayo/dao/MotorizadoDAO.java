@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class MotorizadoDAO {
 
     public void guardar(Motorizado m) {
-        String sql = "INSERT INTO motorizado (nombres, telefono, direccion, dni, activo) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO motorizados (nombres, telefono, dni, activo) VALUES (?, ?, ?, ?)";
 
         ConexionDB db = new ConexionDB();
 
@@ -19,9 +19,8 @@ public class MotorizadoDAO {
 
             stmt.setString(1, m.getNombre());
             stmt.setString(2, m.getTelefono());
-            stmt.setString(3, m.getDireccion());
-            stmt.setString(4, m.getDni());
-            stmt.setBoolean(5, m.isActivo());
+            stmt.setString(3, m.getDni());
+            stmt.setBoolean(4, m.isActivo());
 
             int filas = stmt.executeUpdate();
             if (filas > 0) {
