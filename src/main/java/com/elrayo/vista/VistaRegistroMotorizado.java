@@ -1,19 +1,20 @@
-
 package com.elrayo.vista;
 
 import com.elrayo.controlador.ControladorMotorizado;
 import com.elrayo.entidad.Motorizado;
 import com.elrayo.modelo.ValidadorMotorizado;
 
+public class VistaRegistroMotorizado extends javax.swing.JDialog {
 
-public class VistaRegistroMotorizado extends javax.swing.JFrame {
-
-  
     public VistaRegistroMotorizado() {
         initComponents();
     }
+    private VistaGestionMotorizado padre;
 
-   
+    public VistaRegistroMotorizado(java.awt.Frame parent) {
+    super(parent, true); 
+    initComponents();
+}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -27,7 +28,7 @@ public class VistaRegistroMotorizado extends javax.swing.JFrame {
         txtDni = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("REGISTRO DE MOTORIZADO");
 
@@ -60,34 +61,34 @@ public class VistaRegistroMotorizado extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addComponent(jLabel2))
                             .addComponent(jLabel4))
-                        .addGap(90, 90, 90)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombre)
-                            .addComponent(txtTelefono)
-                            .addComponent(txtDni, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(143, 143, 143)
                         .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jLabel1)
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(btnRegistrar)
                 .addGap(68, 68, 68))
         );
@@ -100,15 +101,20 @@ public class VistaRegistroMotorizado extends javax.swing.JFrame {
         String telefono = txtTelefono.getText();
         String dni = txtDni.getText();
 
-        if (!ValidadorMotorizado.esDniValido(dni)) return;
-        if (!ValidadorMotorizado.esTelefonoValido(telefono)) return;
+        if (!ValidadorMotorizado.esDniValido(dni)) {
+            return;
+        }
+        if (!ValidadorMotorizado.esTelefonoValido(telefono)) {
+            return;
+        }
 
         Motorizado Mnuevos = new Motorizado(dni, rootPaneCheckingEnabled, nombre, telefono);
         ControladorMotorizado Cnuevo = new ControladorMotorizado();
         Cnuevo.registrarMotorizado(Mnuevos);
-        txtNombre.setText("");
-        txtTelefono.setText("");
-        txtDni.setText("");
+       if (padre != null) {
+    padre.cargarTabla(); 
+}
+this.dispose();  
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**

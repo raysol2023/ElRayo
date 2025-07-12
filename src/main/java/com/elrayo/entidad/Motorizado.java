@@ -14,7 +14,7 @@ public class Motorizado extends Persona implements IReportable {
         this.dni = dni;
         this.activo = activo;
     }
-
+    
     public String getDni() { return dni; }
     public void setDni(String dni) { this.dni = dni; }
     public boolean isActivo() { return activo; }
