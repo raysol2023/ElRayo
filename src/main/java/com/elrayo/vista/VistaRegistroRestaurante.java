@@ -23,6 +23,9 @@ public class VistaRegistroRestaurante extends javax.swing.JDialog {
         }
 
     }
+    public void agreagar(){
+        
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

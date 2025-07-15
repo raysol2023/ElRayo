@@ -4,6 +4,8 @@ import com.elrayo.modelo.IReportable;
 
 public class Restaurante extends Persona implements IReportable {
 
+
+    private String ruc;
     private boolean tieneConvenio;
     private int id;
 
@@ -45,7 +47,5 @@ public class Restaurante extends Persona implements IReportable {
 public String toString() {
     return this.nombre;
 }
-
-
-    
+ 
 }
