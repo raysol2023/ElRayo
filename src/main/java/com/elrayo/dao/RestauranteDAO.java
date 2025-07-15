@@ -31,26 +31,29 @@ public class RestauranteDAO {
     }
 
     public List<Restaurante> obtenerTodos() {
-        List<Restaurante> lista = new ArrayList<>();
-        String sql = "SELECT * FROM restaurantes";
+    List<Restaurante> lista = new ArrayList<>();
+    String sql = "SELECT * FROM restaurantes";
 
-        try (Connection conn = new ConexionDB().getConexion(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+    try (Connection conn = new ConexionDB().getConexion();
+         PreparedStatement stmt = conn.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
 
-            while (rs.next()) {
-                Restaurante r = new Restaurante();
-                r.setNombre(rs.getString("nombre"));
-                r.setDireccion(rs.getString("direccion"));
-                r.setTelefono(rs.getString("telefono"));
-                r.setTieneConvenio(rs.getBoolean("tiene_convenio"));
-                lista.add(r);
-            }
-
-        } catch (SQLException e) {
-            System.out.println("⚠ Error al obtener restaurantes: " + e.getMessage());
+        while (rs.next()) {
+            Restaurante r = new Restaurante();
+            r.setId(rs.getInt("id_restaurante")); 
+            r.setNombre(rs.getString("nombre"));
+            r.setDireccion(rs.getString("direccion"));
+            r.setTelefono(rs.getString("telefono"));
+            r.setTieneConvenio(rs.getBoolean("tiene_convenio"));
+            lista.add(r);
         }
 
-        return lista;
+    } catch (SQLException e) {
+        System.out.println("⚠ Error al obtener restaurantes: " + e.getMessage());
     }
+
+    return lista;
+}
 
     public boolean eliminarPorNombre(String nombre) {
         String sql = "DELETE FROM restaurantes WHERE nombre = ?";
@@ -97,9 +100,10 @@ public class RestauranteDAO {
 
             while (rs.next()) {
                 Restaurante r = new Restaurante();
+                r.setId(rs.getInt("id_restaurante"));
                 r.setNombre(rs.getString("nombre"));
-                r.setDireccion(rs.getString("direccion"));
                 r.setTelefono(rs.getString("telefono"));
+                r.setDireccion(rs.getString("direccion"));
                 r.setTieneConvenio(rs.getBoolean("tiene_convenio"));
                 lista.add(r);
             }
