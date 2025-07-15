@@ -100,9 +100,13 @@ public class VistaRegistroCliente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        Cliente objCliente = new Cliente();
+        ControladorCliente objControladorCliente = new ControladorCliente();
+        
         String nombre = txtNombre.getText();
         String telefono = txtTelefono.getText();
         String direccion = txtDireccion.getText();
+        
         if (!ValidadorCliente.noVacioNombre(nombre)) {
             return;
         }
@@ -113,9 +117,8 @@ public class VistaRegistroCliente extends javax.swing.JDialog {
             return;
         }
 
-        Cliente nuevo = new Cliente(nombre, telefono, direccion);
-        ControladorCliente controlador = new ControladorCliente();
-        controlador.registrarCliente(nuevo);
+        objCliente = new Cliente("", nombre, telefono, direccion);
+        objControladorCliente.registrarCliente(objCliente);
 
         txtDireccion.setText("");
         txtNombre.setText("");

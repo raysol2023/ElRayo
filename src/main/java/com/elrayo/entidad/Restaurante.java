@@ -4,6 +4,7 @@ import com.elrayo.modelo.IReportable;
 
 public class Restaurante extends Persona implements IReportable {
     private boolean tieneConvenio;
+    private String ruc;
 
     public Restaurante() {}
 

@@ -256,9 +256,7 @@ public class VistaGestionMotorizado extends javax.swing.JFrame {
     }//GEN-LAST:event_TablaMotorizadoMouseClicked
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        VistaRegistroMotorizado ventanaRegistro = new VistaRegistroMotorizado(this);
-ventanaRegistro.setLocationRelativeTo(this);
-ventanaRegistro.setVisible(true); 
+
 
     }//GEN-LAST:event_btnCrearActionPerformed
 

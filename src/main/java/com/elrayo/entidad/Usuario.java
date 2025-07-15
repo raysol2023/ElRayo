@@ -4,6 +4,7 @@ public class Usuario extends Persona {
     private String usuario;
     private String clave;
     private String rol;
+    private String dni;
 
     public Usuario() {}
 

@@ -1,4 +1,3 @@
-
 package com.elrayo.vista;
 
 import com.elrayo.dao.ClienteDAO;
@@ -9,34 +8,32 @@ import javax.swing.table.DefaultTableModel;
 
 public class VistaGestionCliente extends javax.swing.JFrame {
 
-  
     public VistaGestionCliente() {
         initComponents();
         cargarTabla();
     }
 
- private void cargarTabla() {
-    ClienteDAO dao = new ClienteDAO();
-    List<Cliente> lista = dao.ObtenerTodos();
+    private void cargarTabla() {
+        ClienteDAO dao = new ClienteDAO();
+        List<Cliente> lista = dao.ObtenerTodos();
 
-    DefaultTableModel modelo = new DefaultTableModel();
-    modelo.addColumn("Nombre");
-    modelo.addColumn("Teléfono");
-    modelo.addColumn("Dirección");
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Teléfono");
+        modelo.addColumn("Dirección");
 
-    for (Cliente c : lista) {
-        Object[] fila = {
-            c.getNombre(),
-            c.getTelefono(),
-            c.getDireccion()
-        };
-        modelo.addRow(fila);
+        for (Cliente c : lista) {
+            Object[] fila = {
+                c.getNombre(),
+                c.getTelefono(),
+                c.getDireccion()
+            };
+            modelo.addRow(fila);
+        }
+
+        TablaClientes.setModel(modelo);
     }
 
-    TablaClientes.setModel(modelo);
-}
- 
- 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -118,7 +115,7 @@ public class VistaGestionCliente extends javax.swing.JFrame {
                             .addComponent(btnBorrar))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +134,7 @@ public class VistaGestionCliente extends javax.swing.JFrame {
                         .addComponent(btnBorrar)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
@@ -146,92 +143,102 @@ public class VistaGestionCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-       VistaRegistroCliente ventana = new VistaRegistroCliente(this);
-    ventana.setVisible(true);
-    cargarTabla(); 
+
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String filtro = JOptionPane.showInputDialog(this, "🔎 Ingrese nombre o teléfono:");
-    if (filtro == null || filtro.trim().isEmpty()) return;
+        if (filtro == null || filtro.trim().isEmpty()) {
+            return;
+        }
 
-    ClienteDAO dao = new ClienteDAO();
-    List<Cliente> resultado = dao.buscar(filtro.trim());
+        ClienteDAO dao = new ClienteDAO();
+        List<Cliente> resultado = dao.buscar(filtro.trim());
 
-    if (resultado.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "❌ No se encontró ningún cliente.");
-        return;
-    }
+        if (resultado.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "❌ No se encontró ningún cliente.");
+            return;
+        }
 
-    DefaultTableModel modelo = new DefaultTableModel();
-    modelo.addColumn("Nombre");
-    modelo.addColumn("Teléfono");
-    modelo.addColumn("Dirección");
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Teléfono");
+        modelo.addColumn("Dirección");
 
-    for (Cliente c : resultado) {
-        modelo.addRow(new Object[]{c.getNombre(), c.getTelefono(), c.getDireccion()});
-    }
+        for (Cliente c : resultado) {
+            modelo.addRow(new Object[]{c.getNombre(), c.getTelefono(), c.getDireccion()});
+        }
 
-    TablaClientes.setModel(modelo);
+        TablaClientes.setModel(modelo);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         int fila = TablaClientes.getSelectedRow();
 
-    if (fila == -1) {
-        JOptionPane.showMessageDialog(this, "⚠ Selecciona una fila para eliminar.");
-        return;
-    }
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "⚠ Selecciona una fila para eliminar.");
+            return;
+        }
 
-    String nombre = TablaClientes.getValueAt(fila, 0).toString();
-    int confirm = JOptionPane.showConfirmDialog(this, "¿Eliminar al cliente \"" + nombre + "\"?", "Confirmar", JOptionPane.YES_NO_OPTION);
-    if (confirm != JOptionPane.YES_OPTION) return;
+        String nombre = TablaClientes.getValueAt(fila, 0).toString();
+        int confirm = JOptionPane.showConfirmDialog(this, "¿Eliminar al cliente \"" + nombre + "\"?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
 
-    ClienteDAO dao = new ClienteDAO();
-    if (dao.eliminarPorNombre(nombre)) {
-        JOptionPane.showMessageDialog(this, "✅ Cliente eliminado.");
-        cargarTabla();
-    } else {
-        JOptionPane.showMessageDialog(this, "❌ Error al eliminar cliente.");
-    }
+        ClienteDAO dao = new ClienteDAO();
+        if (dao.eliminarPorNombre(nombre)) {
+            JOptionPane.showMessageDialog(this, "✅ Cliente eliminado.");
+            cargarTabla();
+        } else {
+            JOptionPane.showMessageDialog(this, "❌ Error al eliminar cliente.");
+        }
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-      int fila = TablaClientes.getSelectedRow();
+        int fila = TablaClientes.getSelectedRow();
 
-    if (fila == -1) {
-        JOptionPane.showMessageDialog(this, "⚠ Selecciona una fila para editar.");
-        return;
-    }
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "⚠ Selecciona una fila para editar.");
+            return;
+        }
 
-    String nombre = TablaClientes.getValueAt(fila, 0).toString();
-    String telefono = TablaClientes.getValueAt(fila, 1).toString();
-    String direccion = TablaClientes.getValueAt(fila, 2).toString();
-    
-    String nuevoNombre = JOptionPane.showInputDialog(this, "? Nuevo Nombre:", nombre);
-    if (nuevoNombre == null || nuevoNombre.trim().isEmpty()) return;
-    String nuevoTelefono = JOptionPane.showInputDialog(this, "📞 Nuevo teléfono:", telefono);
-    if (nuevoTelefono == null || nuevoTelefono.trim().isEmpty()) return;
+        String nombre = TablaClientes.getValueAt(fila, 0).toString();
+        String telefono = TablaClientes.getValueAt(fila, 1).toString();
+        String direccion = TablaClientes.getValueAt(fila, 2).toString();
 
-    String nuevaDireccion = JOptionPane.showInputDialog(this, "🏠 Nueva dirección:", direccion);
-    if (nuevaDireccion == null || nuevaDireccion.trim().isEmpty()) return;
+        String nuevoNombre = JOptionPane.showInputDialog(this, "? Nuevo Nombre:", nombre);
+        if (nuevoNombre == null || nuevoNombre.trim().isEmpty()) {
+            return;
+        }
+        String nuevoTelefono = JOptionPane.showInputDialog(this, "📞 Nuevo teléfono:", telefono);
+        if (nuevoTelefono == null || nuevoTelefono.trim().isEmpty()) {
+            return;
+        }
 
-    Cliente c = new Cliente(nombre, nuevoTelefono.trim(), nuevaDireccion.trim());
-    ClienteDAO dao = new ClienteDAO();
+        String nuevaDireccion = JOptionPane.showInputDialog(this, "🏠 Nueva dirección:", direccion);
+        if (nuevaDireccion == null || nuevaDireccion.trim().isEmpty()) {
+            return;
+        }
 
-    if (dao.actualizar(c)) {
-        JOptionPane.showMessageDialog(this, "✅ Cliente actualizado.");
-        cargarTabla();
-    } else {
-        JOptionPane.showMessageDialog(this, "❌ No se pudo actualizar.");
-    }
+        Cliente objCliente = new Cliente("", nombre, nuevoTelefono.trim(), nuevaDireccion.trim());
+
+//    Cliente c = new Cliente(nombre, nuevoTelefono.trim(), nuevaDireccion.trim());
+        ClienteDAO dao = new ClienteDAO();
+
+        if (dao.actualizar(objCliente)) {
+            JOptionPane.showMessageDialog(this, "✅ Cliente actualizado.");
+            cargarTabla();
+        } else {
+            JOptionPane.showMessageDialog(this, "❌ No se pudo actualizar.");
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void TablaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaClientesMouseClicked
-        int fila = TablaClientes.getSelectedRow(); 
-    if (fila != -1) {
-        btnEditar.setEnabled(true); 
-    }
+        int fila = TablaClientes.getSelectedRow();
+        if (fila != -1) {
+            btnEditar.setEnabled(true);
+        }
     }//GEN-LAST:event_TablaClientesMouseClicked
 
     /**

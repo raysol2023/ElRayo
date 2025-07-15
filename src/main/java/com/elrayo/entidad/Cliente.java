@@ -1,9 +1,14 @@
 package com.elrayo.entidad;
 
 public class Cliente extends Persona {
-    public Cliente() {}
-    public Cliente(String nombre, String telefono, String direccion) {
+    private String dni;
+
+    public Cliente() {
+    }
+
+    public Cliente(String dni, String nombre, String telefono, String direccion) {
         super(nombre, telefono, direccion);
+        this.dni = dni;
     }
 
     public String getDireccion() {
