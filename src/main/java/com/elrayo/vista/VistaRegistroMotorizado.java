@@ -15,6 +15,10 @@ public class VistaRegistroMotorizado extends javax.swing.JDialog {
     super(parent, true); 
     initComponents();
 }
+    
+    public void agreagar(){
+        
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

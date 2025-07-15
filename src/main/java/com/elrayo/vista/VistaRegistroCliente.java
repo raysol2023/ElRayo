@@ -14,6 +14,9 @@ public class VistaRegistroCliente extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(parent);
     }
+    public void agreagar(){
+        
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
