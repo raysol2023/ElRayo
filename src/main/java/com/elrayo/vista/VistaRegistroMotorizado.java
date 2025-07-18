@@ -9,16 +9,14 @@ public class VistaRegistroMotorizado extends javax.swing.JDialog {
     public VistaRegistroMotorizado() {
         initComponents();
     }
+
     private VistaGestionMotorizado padre;
 
     public VistaRegistroMotorizado(java.awt.Frame parent) {
-    super(parent, true); 
-    initComponents();
-}
-    
-    public void agreagar(){
-        
+        super(parent, true);
+        initComponents();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -105,20 +103,14 @@ public class VistaRegistroMotorizado extends javax.swing.JDialog {
         String telefono = txtTelefono.getText();
         String dni = txtDni.getText();
 
-        if (!ValidadorMotorizado.esDniValido(dni)) {
-            return;
-        }
-        if (!ValidadorMotorizado.esTelefonoValido(telefono)) {
-            return;
-        }
+        ControladorMotorizado objControladorMotorizado = new ControladorMotorizado();
+        Motorizado objMotorizado = new Motorizado(dni, rootPaneCheckingEnabled, nombre, telefono);
+        objControladorMotorizado.registrarMotorizado(objMotorizado);
 
-        Motorizado Mnuevos = new Motorizado(dni, rootPaneCheckingEnabled, nombre, telefono);
-        ControladorMotorizado Cnuevo = new ControladorMotorizado();
-        Cnuevo.registrarMotorizado(Mnuevos);
-       if (padre != null) {
-    padre.cargarTabla(); 
-}
-this.dispose();  
+        if (padre != null) {
+            padre.cargarTabla();
+        }
+        this.dispose();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**

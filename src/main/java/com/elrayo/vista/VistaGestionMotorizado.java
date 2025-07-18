@@ -1,5 +1,6 @@
 package com.elrayo.vista;
 
+import com.elrayo.controlador.ControladorMotorizado;
 import com.elrayo.entidad.Motorizado;
 import com.elrayo.dao.MotorizadoDAO;
 import java.util.List;
@@ -7,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class VistaGestionMotorizado extends javax.swing.JFrame {
+    ControladorMotorizado objControladorMotorizado = new ControladorMotorizado();
 
     public VistaGestionMotorizado() {
         initComponents();
@@ -14,8 +16,8 @@ public class VistaGestionMotorizado extends javax.swing.JFrame {
     }
 
     public void cargarTabla() {
-        MotorizadoDAO dao = new MotorizadoDAO();
-        List<Motorizado> lista = dao.obtenerTodos();
+        
+        List<Motorizado> lista = objControladorMotorizado.mostrarMotorizados();
 
         DefaultTableModel modelo = new DefaultTableModel(
                 new String[]{"Nombre", "Teléfono", "DNI", "Activo"}, 0
@@ -216,6 +218,8 @@ public class VistaGestionMotorizado extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "❌ No se pudo eliminar.");
             }
         }
+        objControladorMotorizado.mostrarMotorizados();
+        
 
     }//GEN-LAST:event_btnEliminarActionPerformed
 

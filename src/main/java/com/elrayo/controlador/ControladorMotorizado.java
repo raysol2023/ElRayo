@@ -3,6 +3,7 @@ package com.elrayo.controlador;
 import com.elrayo.dao.MotorizadoDAO;
 import com.elrayo.entidad.Motorizado;
 import com.elrayo.modelo.ValidadorMotorizado;
+import java.util.List;
 
 public class ControladorMotorizado {
     private MotorizadoDAO dao = new MotorizadoDAO();
@@ -15,4 +16,10 @@ public class ControladorMotorizado {
         }
         return false;
     }
+    
+    public List<Motorizado> mostrarMotorizados(){
+        return dao.obtenerTodos();
+    }
+    
+    
 }
