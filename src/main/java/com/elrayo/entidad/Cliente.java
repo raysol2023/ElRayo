@@ -26,6 +26,15 @@ public class Cliente extends Persona {
         this.id = id;
     }
 
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+    
+
     @Override
     public String toString() {
         return this.nombre;

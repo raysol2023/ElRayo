@@ -13,12 +13,13 @@ import java.util.List;
 public class ClienteDAO {
 
     public void GuardarCliente(Cliente n) {
-        String sql = " INSERT INTO clientes(nombre, telefono, direccion)VALUES(?,?,?)";
+        String sql = " INSERT INTO clientes(nombre, dni, telefono, direccion)VALUES(?,?,?,?)";
         ConexionDB BD = new ConexionDB();
         try (Connection conn = BD.getConexion(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, n.getNombre());
-            stmt.setString(2, n.getTelefono());
-            stmt.setString(3, n.getDireccion());
+            stmt.setString(2, n.getDni());
+            stmt.setString(3, n.getTelefono());
+            stmt.setString(4, n.getDireccion());
             int filas = stmt.executeUpdate();
             if (filas > 0) {
                 System.out.println("✔ Cliente guardado correctamente en la base de datos.");
@@ -38,8 +39,9 @@ public class ClienteDAO {
 
             while (rs.next()) {
                 Cliente c = new Cliente();
-                c.setId(rs.getInt("id_cliente")); 
+                c.setId(rs.getInt("id_cliente"));
                 c.setNombre(rs.getString("nombre"));
+                c.setDni(rs.getString("dni"));
                 c.setTelefono(rs.getString("telefono"));
                 c.setDireccion(rs.getString("direccion"));
                 lista.add(c);
@@ -66,13 +68,14 @@ public class ClienteDAO {
     }
 
     public boolean actualizar(Cliente c) {
-        String sql = "UPDATE clientes SET telefono = ?, direccion = ? WHERE nombre = ?";
+        String sql = "UPDATE clientes SET dni = ?, telefono = ?, direccion = ? WHERE nombre = ?";
 
         try (Connection conn = new ConexionDB().getConexion(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, c.getTelefono());
-            stmt.setString(2, c.getDireccion());
-            stmt.setString(3, c.getNombre());
+            stmt.setString(1, c.getDni());
+            stmt.setString(2, c.getTelefono());
+            stmt.setString(3, c.getDireccion());
+            stmt.setString(4, c.getNombre());
 
             return stmt.executeUpdate() > 0;
 
@@ -96,6 +99,7 @@ public class ClienteDAO {
             while (rs.next()) {
                 Cliente c = new Cliente();
                 c.setNombre(rs.getString("nombre"));
+                c.setDni(rs.getString("dni"));
                 c.setTelefono(rs.getString("telefono"));
                 c.setDireccion(rs.getString("direccion"));
                 lista.add(c);
