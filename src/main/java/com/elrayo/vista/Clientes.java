@@ -9,14 +9,16 @@ import java.awt.Desktop;
 import java.net.URI;
 import java.util.List;
 import javax.swing.JCheckBox;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 public class Clientes extends javax.swing.JPanel {
 
     ControladorCliente objControladorCliente = new ControladorCliente();
     DefaultTableModel modelo = new DefaultTableModel(
-            new String[]{"Nombre", "Dni", "Teléfono", "Direccion", "WhatsApp"}, 0
+            new String[]{"Nombre", "Dni", "Teléfono", "Dirección", "WhatsApp"}, 0
     ) {
         @Override
         public boolean isCellEditable(int row, int column) {
@@ -26,8 +28,26 @@ public class Clientes extends javax.swing.JPanel {
 
     public Clientes() {
         initComponents();
+
+        tbCliente.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tbCliente.setRowHeight(30);
+
         InitStyles();
         cargarTabla();
+
+        // Ajustar columnas una vez la vista está visible
+        SwingUtilities.invokeLater(() -> ajustarColumnasPorPorcentaje());
+
+        // Obtener scrollPane que contiene la tabla
+        JScrollPane scrollPane = (JScrollPane) tbCliente.getParent().getParent();
+
+        // Agregar listener al scrollPane para detectar redimensionamiento
+        scrollPane.addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                ajustarColumnasPorPorcentaje();
+            }
+        });
     }
 
     private void InitStyles() {
@@ -46,15 +66,15 @@ public class Clientes extends javax.swing.JPanel {
                 m.getDni(),
                 m.getTelefono(),
                 m.getDireccion(),
-                "Ver" // En la columna WhatsApp pondremos el botón
+                "Ver"
             };
             modelo.addRow(fila);
         }
 
         tbCliente.setModel(modelo);
+        tbCliente.setRowHeight(30);
 
         agregarBotonWhatsApp(tbCliente, 2, 4); // Teléfono está en columna 2, botón en columna 4
-
     }
 
     public void agregarBotonWhatsApp(JTable tabla, int columnaTelefono, int columnaBoton) {
@@ -69,6 +89,19 @@ public class Clientes extends javax.swing.JPanel {
                 ex.printStackTrace();
             }
         }));
+    }
+
+    public void ajustarColumnasPorPorcentaje() {
+        int totalWidth = tbCliente.getParent().getWidth(); // contenedor dentro del JScrollPane
+        if (totalWidth <= 0) {
+            return;
+        }
+        int[] porcentajes = {35, 10, 10, 35, 10}; // Nombre, Dni, Teléfono, Dirección, WhatsApp
+
+        for (int i = 0; i < porcentajes.length; i++) {
+            int ancho = (totalWidth * porcentajes[i]) / 100;
+            tbCliente.getColumnModel().getColumn(i).setPreferredWidth(ancho);
+        }
     }
 
     @SuppressWarnings("unchecked")

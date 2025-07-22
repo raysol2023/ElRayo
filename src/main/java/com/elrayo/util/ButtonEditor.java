@@ -1,27 +1,42 @@
 package com.elrayo.util;
 
-import java.awt.Component;
+import java.awt.*;
 import java.awt.event.ActionListener;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JTable;
+import javax.swing.*;
 
 public class ButtonEditor extends DefaultCellEditor {
 
-    private JButton button;
+    private final JButton button;
+    private final JPanel panel;
     private String label;
-    private boolean isPushed;
 
     public ButtonEditor(JCheckBox checkBox, ActionListener action) {
         super(checkBox);
+
+        // Crear botón personalizado
         button = new JButton();
-        button.setOpaque(true);
+        button.setFocusable(false);
+        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        button.setBackground(new Color(37, 211, 102));
+        button.setForeground(Color.WHITE);
+        button.setOpaque(false);
+
+        // FlatLaf: bordes redondeados
+        button.putClientProperty("JButton.arc", 999);
+        button.putClientProperty("JButton.buttonType", "roundRect");
+
+        // Tamaño compacto
+        button.setPreferredSize(new Dimension(70, 24)); // ancho, alto
+
         button.addActionListener(e -> {
-            isPushed = true;
             fireEditingStopped();
-            action.actionPerformed(e); // llama a la acción que tú defines
+            action.actionPerformed(e);
         });
+
+        // Panel contenedor centrado
+        panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        panel.setOpaque(false);
+        panel.add(button);
     }
 
     @Override
@@ -29,12 +44,11 @@ public class ButtonEditor extends DefaultCellEditor {
             boolean isSelected, int row, int column) {
         label = (value == null) ? "" : value.toString();
         button.setText(label);
-        return button;
+        return panel;
     }
 
     @Override
     public Object getCellEditorValue() {
-        isPushed = false;
         return label;
     }
 }
