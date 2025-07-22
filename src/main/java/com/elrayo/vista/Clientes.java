@@ -7,8 +7,16 @@ package com.elrayo.vista;
 import com.elrayo.controlador.ControladorCliente;
 import com.elrayo.entidad.Cliente;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Desktop;
+import java.net.URI;
 import java.util.List;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -40,15 +48,81 @@ public class Clientes extends javax.swing.JPanel {
     public void cargarTabla() {
         List<Cliente> lista = objControladorCliente.mostrarClientes();
 
+        modelo.setRowCount(0); // Limpia la tabla
+
         for (Cliente m : lista) {
             Object[] fila = {
                 m.getNombre(),
                 m.getDni(),
                 m.getTelefono(),
-                m.getDireccion(),};
+                m.getDireccion(),
+                "Ver" // En la columna WhatsApp pondremos el botón
+            };
             modelo.addRow(fila);
         }
+
         tbCliente.setModel(modelo);
+
+        // Columna WhatsApp es la columna 4 (índice desde 0)
+        agregarBotonAccion(tbCliente, 4);
+    }
+
+    class ButtonEditor extends DefaultCellEditor {
+
+        private JButton button;
+        private String label;
+        private boolean isPushed;
+        private int selectedRow;
+
+        public ButtonEditor(JCheckBox checkBox) {
+            super(checkBox);
+            button = new JButton();
+            button.setOpaque(true);
+            button.addActionListener(e -> fireEditingStopped());
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value,
+                boolean isSelected, int row, int column) {
+            label = (value == null) ? "Ver" : value.toString();
+            button.setText(label);
+            isPushed = true;
+            selectedRow = row;
+            return button;
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+            if (isPushed) {
+                String telefono = (String) tbCliente.getValueAt(selectedRow, 2); // columna Teléfono
+                try {
+                    Desktop.getDesktop().browse(new URI("https://wa.me/51" + telefono));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+            isPushed = false;
+            return label;
+        }
+    }
+
+    class ButtonRenderer extends JButton implements TableCellRenderer {
+
+        public ButtonRenderer() {
+            setOpaque(true);
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value,
+                boolean isSelected, boolean hasFocus, int row, int column) {
+            setText((value == null) ? "Ver" : value.toString());
+            return this;
+        }
+    }
+
+    public void agregarBotonAccion(JTable tabla, int columna) {
+        tabla.getColumnModel().getColumn(columna).setCellRenderer(new ButtonRenderer());
+        tabla.getColumnModel().getColumn(columna).setCellEditor(new ButtonEditor(new JCheckBox()));
     }
 
     @SuppressWarnings("unchecked")
