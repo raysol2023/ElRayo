@@ -9,7 +9,8 @@ public class ButtonRenderer extends JPanel implements TableCellRenderer {
     private final JButton button;
 
     public ButtonRenderer(String text) {
-        setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0)); // sin margen vertical
+        // 👇 Cambia CENTER por LEFT para alinear a la izquierda
+        setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0)); // sin margen vertical
         setOpaque(false);
 
         button = new JButton(text);

@@ -7,12 +7,17 @@ import com.elrayo.util.ButtonRenderer;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.net.URI;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
+import javax.swing.SwingConstants;
 
 public class Clientes extends javax.swing.JPanel {
 
@@ -32,16 +37,17 @@ public class Clientes extends javax.swing.JPanel {
         tbCliente.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbCliente.setRowHeight(30);
 
+        // 👉 Alinea los encabezados a la izquierda
+        JTableHeader header = tbCliente.getTableHeader();
+        DefaultTableCellRenderer leftRenderer = (DefaultTableCellRenderer) header.getDefaultRenderer();
+        leftRenderer.setHorizontalAlignment(SwingConstants.LEFT);
+
         InitStyles();
         cargarTabla();
 
-        // Ajustar columnas una vez la vista está visible
         SwingUtilities.invokeLater(() -> ajustarColumnasPorPorcentaje());
 
-        // Obtener scrollPane que contiene la tabla
         JScrollPane scrollPane = (JScrollPane) tbCliente.getParent().getParent();
-
-        // Agregar listener al scrollPane para detectar redimensionamiento
         scrollPane.addComponentListener(new java.awt.event.ComponentAdapter() {
             @Override
             public void componentResized(java.awt.event.ComponentEvent evt) {
@@ -82,12 +88,24 @@ public class Clientes extends javax.swing.JPanel {
 
         tabla.getColumnModel().getColumn(columnaBoton).setCellEditor(new ButtonEditor(new JCheckBox(), e -> {
             int row = tabla.getSelectedRow();
-            String telefono = tabla.getValueAt(row, columnaTelefono).toString();
+            String telefono = tabla.getValueAt(row, columnaTelefono).toString().replaceAll("\\s+", "");
+
+            String textoPlano = "Hola enviando mensaje desde java";
+
             try {
-                Desktop.getDesktop().browse(new URI("https://wa.me/51" + telefono));
+                // Codifica el texto correctamente para URL
+                String textoWhatsApp = URLEncoder.encode(textoPlano, StandardCharsets.UTF_8.toString()).replace("+", "%20");
+
+                // Construir el enlace para abrir directamente WhatsApp
+                String url = "whatsapp://send/?phone=" + telefono + "&text=" + textoWhatsApp;
+
+                Desktop.getDesktop().browse(new URI(url));
+                System.out.println(url);
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
+
         }));
     }
 
