@@ -4,7 +4,11 @@
  */
 package com.elrayo.vista;
 
+import com.elrayo.controlador.ControladorCliente;
+import com.elrayo.entidad.Cliente;
 import java.awt.Color;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -12,18 +16,41 @@ import java.awt.Color;
  */
 public class Clientes extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Clientes
-     */
+    ControladorCliente objControladorCliente = new ControladorCliente();
+    DefaultTableModel modelo = new DefaultTableModel(
+            new String[]{"Nombre", "Dni", "Teléfono", "Direccion", "WhatsApp"}, 0
+    ) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return column != 2;
+        }
+    };
+
     public Clientes() {
         initComponents();
         InitStyles();
+        cargarTabla();
     }
 
     private void InitStyles() {
         title.putClientProperty("FlatLaf.style", "font: light $h1.regular.font");
         title.setForeground(Color.black);
     }
+
+    public void cargarTabla() {
+        List<Cliente> lista = objControladorCliente.mostrarClientes();
+
+        for (Cliente m : lista) {
+            Object[] fila = {
+                m.getNombre(),
+                m.getDni(),
+                m.getTelefono(),
+                m.getDireccion(),};
+            modelo.addRow(fila);
+        }
+        tbCliente.setModel(modelo);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -33,7 +60,7 @@ public class Clientes extends javax.swing.JPanel {
         userSearch = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbCliente = new javax.swing.JTable();
         deleteButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         addButton = new javax.swing.JButton();
@@ -57,30 +84,30 @@ public class Clientes extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbCliente.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        tbCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombre", "Dni", "Telefono", "Direccion"
+                "Nombre", "Dni", "Telefono", "Direccion", "WhatsApp"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbCliente.getTableHeader().setReorderingAllowed(false);
+        tbCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTable1MousePressed(evt);
+                tbClienteMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbCliente);
 
         deleteButton.setBackground(new java.awt.Color(18, 90, 173));
         deleteButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -126,23 +153,24 @@ public class Clientes extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
                         .addGap(699, 699, 699))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
-                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addGap(427, 427, 427)
-                                .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addComponent(userSearch)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(searchButton)))
-                        .addGap(50, 50, 50))))
+                        .addComponent(userSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchButton)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
+                        .addGap(459, 459, 459)
+                        .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,11 +178,11 @@ public class Clientes extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(userSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteButton)
@@ -177,48 +205,48 @@ public class Clientes extends javax.swing.JPanel {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         //        try {
-            //            DAOUsers dao = new DAOUsersImpl();
-            //            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            //            model.setRowCount(0);
-            //            dao.listar(userSearch.getText()).forEach((u) -> model.addRow(new Object[]{u.getId(), u.getName(), u.getLast_name_p(), u.getLast_name_m(), u.getDomicilio(), u.getTel()}));
-            //        } catch (Exception e) {
-            //            System.out.println(e.getMessage());
-            //        }
+        //            DAOUsers dao = new DAOUsersImpl();
+        //            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        //            model.setRowCount(0);
+        //            dao.listar(userSearch.getText()).forEach((u) -> model.addRow(new Object[]{u.getId(), u.getName(), u.getLast_name_p(), u.getLast_name_m(), u.getDomicilio(), u.getTel()}));
+        //        } catch (Exception e) {
+        //            System.out.println(e.getMessage());
+        //        }
     }//GEN-LAST:event_searchButtonActionPerformed
 
-    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+    private void tbClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbClienteMousePressed
 
-    }//GEN-LAST:event_jTable1MousePressed
+    }//GEN-LAST:event_tbClienteMousePressed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         //        DAOUsers dao = new DAOUsersImpl();
         //        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         //        if (jTable1.getSelectedRows().length < 1) {
-            //            javax.swing.JOptionPane.showMessageDialog(this, "Debes seleccionar uno o más usuarios a eliminar.\n", "AVISO", javax.swing.JOptionPane.ERROR_MESSAGE);
-            //        } else {
-            //            for (int i : jTable1.getSelectedRows()) {
-                //                try {
-                    //                    dao.eliminar((int) jTable1.getValueAt(i, 0));
-                    //                    model.removeRow(i);
-                    //                } catch (Exception e) {
-                    //                    System.out.println(e.getMessage());
-                    //                }
-                //            }
-            //        }
+        //            javax.swing.JOptionPane.showMessageDialog(this, "Debes seleccionar uno o más usuarios a eliminar.\n", "AVISO", javax.swing.JOptionPane.ERROR_MESSAGE);
+        //        } else {
+        //            for (int i : jTable1.getSelectedRows()) {
+        //                try {
+        //                    dao.eliminar((int) jTable1.getValueAt(i, 0));
+        //                    model.removeRow(i);
+        //                } catch (Exception e) {
+        //                    System.out.println(e.getMessage());
+        //                }
+        //            }
+        //        }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         //        if (jTable1.getSelectedRow() > -1) {
-            //            try {
-                //                int userId = (int) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
-                //                DAOUsers dao = new DAOUsersImpl();
-                //                Dashboard.ShowJPanel(new UpUsers(dao.getUserById(userId)));
-                //            } catch (Exception e) {
-                //                System.out.println(e.getMessage());
-                //            }
-            //        } else {
-            //            javax.swing.JOptionPane.showMessageDialog(this, "Debes seleccionar el usuario a editar.\n", "AVISO", javax.swing.JOptionPane.ERROR_MESSAGE);
-            //        }
+        //            try {
+        //                int userId = (int) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+        //                DAOUsers dao = new DAOUsersImpl();
+        //                Dashboard.ShowJPanel(new UpUsers(dao.getUserById(userId)));
+        //            } catch (Exception e) {
+        //                System.out.println(e.getMessage());
+        //            }
+        //        } else {
+        //            javax.swing.JOptionPane.showMessageDialog(this, "Debes seleccionar el usuario a editar.\n", "AVISO", javax.swing.JOptionPane.ERROR_MESSAGE);
+        //        }
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
@@ -232,8 +260,8 @@ public class Clientes extends javax.swing.JPanel {
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton searchButton;
+    private javax.swing.JTable tbCliente;
     private javax.swing.JLabel title;
     private javax.swing.JTextField userSearch;
     // End of variables declaration//GEN-END:variables
