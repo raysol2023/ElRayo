@@ -20,7 +20,7 @@ public class VistaRegistroCliente extends javax.swing.JDialog {
 
     public void cargarTabla() {
 
-        List<Cliente> lista = objControladorCliente.mostrarClientes();
+        //List<Cliente> lista = objControladorCliente.mostrarClientes();
 
         DefaultTableModel modelo = new DefaultTableModel(
                 new String[]{"NOMBRE", "DNI", "TELEFONO", "DIRECCION"}, 0
@@ -31,14 +31,14 @@ public class VistaRegistroCliente extends javax.swing.JDialog {
             }
         };
 
-        for (Cliente m : lista) {
-            Object[] fila = {
-                m.getNombre(),
-                m.getDni(),
-                m.getTelefono(),
-                m.getDireccion(),};
-            modelo.addRow(fila);
-        }
+//        for (Cliente m : lista) {
+//            Object[] fila = {
+//                m.getNombre(),
+//                m.getDni(),
+//                m.getTelefono(),
+//                m.getDireccion(),};
+//            modelo.addRow(fila);
+//        }
 
         tbCliente.setModel(modelo);
     }
@@ -309,7 +309,7 @@ public class VistaRegistroCliente extends javax.swing.JDialog {
 
         ControladorCliente objControladorCliente = new ControladorCliente();
         Cliente objCliente = new Cliente(dni, nombre, telefono, direccion);
-        objControladorCliente.registrarCliente(objCliente);
+        //objControladorCliente.registrarCliente(objCliente);
 
     }//GEN-LAST:event_btnRegistrarClienteActionPerformed
 
@@ -358,7 +358,7 @@ public class VistaRegistroCliente extends javax.swing.JDialog {
 
         ControladorCliente objControladorCliente = new ControladorCliente();
         Cliente objCliente = new Cliente(dni, nombre, telefono, direccion);
-        objControladorCliente.editarCliente(objCliente);
+        //objControladorCliente.editarCliente(objCliente);
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

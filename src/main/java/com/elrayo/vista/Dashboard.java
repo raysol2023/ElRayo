@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.logging.Level;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
@@ -319,7 +320,11 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_principalActionPerformed
 
     private void btn_clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clientesActionPerformed
-        ShowJPanel(new Clientes());
+        try {
+            ShowJPanel(new Clientes());
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_clientesActionPerformed
 
     private void btn_motorizadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_motorizadosActionPerformed

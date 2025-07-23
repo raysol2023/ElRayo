@@ -39,13 +39,13 @@ public class VistaGestionComanda extends javax.swing.JFrame {
     }
 
     private void cargarClientes() {
-        ClienteDAO dao = new ClienteDAO();
-        List<Cliente> lista = dao.ObtenerTodos();
-        cbxCliente.removeAllItems();
-        cbxCliente.addItem(null);
-        for (Cliente c : lista) {
-            cbxCliente.addItem(c);
-        }
+//        ClienteDAO dao = new ClienteDAO();
+//        List<Cliente> lista = dao.ObtenerTodos();
+//        cbxCliente.removeAllItems();
+//        cbxCliente.addItem(null);
+//        for (Cliente c : lista) {
+//            cbxCliente.addItem(c);
+//        }
     }
 
     private void cargarRestaurantes() {

@@ -249,7 +249,6 @@
               <Image iconType="3" name="/cutlery.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Restaurantes"/>
-            <Property name="actionCommand" type="java.lang.String" value="Restaurantes"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
                 <MatteColorBorder bottom="1" left="13" right="1" top="1"/>

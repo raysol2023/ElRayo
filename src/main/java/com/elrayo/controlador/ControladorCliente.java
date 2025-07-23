@@ -9,30 +9,40 @@ public class ControladorCliente {
 
     private ClienteDAO dao = new ClienteDAO();
 
-    public boolean registrarCliente(Cliente cliente) {
-        if (ValidadorCliente.esDniValido(cliente.getDni())
-                && ValidadorCliente.esTelefonoValido(cliente.getTelefono())
-                && ValidadorCliente.noVacioNombre(cliente.getNombre())
-                && ValidadorCliente.noVacioDireccion(cliente.getDireccion())) {
-            dao.GuardarCliente(cliente);
+    public void registrarCliente(Cliente ObjCliente) throws Exception {
+        if (ValidadorCliente.esDniValido(ObjCliente.getDni())
+                && ValidadorCliente.esTelefonoValido(ObjCliente.getTelefono())
+                && ValidadorCliente.noVacioNombre(ObjCliente.getNombre())
+                && ValidadorCliente.noVacioDireccion(ObjCliente.getDireccion())) {
+            dao.registrar(ObjCliente);
+        }
+    }
+
+    public List<Cliente> mostrarClientes(String name) throws Exception {
+        return dao.listar(name);
+    }
+
+    public boolean editarCliente(Cliente objCliente) throws Exception {
+        if (ValidadorCliente.esDniValido(objCliente.getDni())
+                && ValidadorCliente.esTelefonoValido(objCliente.getTelefono())
+                && ValidadorCliente.noVacioNombre(objCliente.getNombre())
+                && ValidadorCliente.noVacioDireccion(objCliente.getDireccion())) {
+            dao.modificar(objCliente);
             return true;
         }
         return false;
     }
 
-    public List<Cliente> mostrarClientes() {
-        return dao.ObtenerTodos();
+    public void eliminar(int id) throws Exception {
+        dao.eliminar(id);
+    }
+
+    public boolean tieneComandas(int id) throws Exception{
+        return dao.tieneComandas(id);
     }
     
-    public boolean editarCliente(Cliente cliente){
-        if (ValidadorCliente.esDniValido(cliente.getDni())
-                && ValidadorCliente.esTelefonoValido(cliente.getTelefono())
-                && ValidadorCliente.noVacioNombre(cliente.getNombre())
-                && ValidadorCliente.noVacioDireccion(cliente.getDireccion())) {
-            dao.actualizar(cliente);
-            return true;
-        }
-        return false;
+    public Cliente editarUnCliente(int id) throws Exception {
+        return dao.getClientById(id);
     }
-            
+
 }
