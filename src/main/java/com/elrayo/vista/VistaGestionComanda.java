@@ -284,12 +284,12 @@ public class VistaGestionComanda extends javax.swing.JFrame {
         comanda.setFechaHora(LocalDateTime.now());
 
         ControladorComanda controlador = new ControladorComanda();
-        if (controlador.registrarComanda(comanda)) {
-            JOptionPane.showMessageDialog(this, "✅ Comanda registrada.");
-            cargarTabla();
-        } else {
-            JOptionPane.showMessageDialog(this, "❌ Error al registrar.");
-        }
+//        if (controlador.registrarComanda(comanda)) {
+//            JOptionPane.showMessageDialog(this, "✅ Comanda registrada.");
+//            cargarTabla();
+//        } else {
+//            JOptionPane.showMessageDialog(this, "❌ Error al registrar.");
+//        }
 
         txtDistancia.setText("");
         cbxRequiereCompra.setSelected(false);

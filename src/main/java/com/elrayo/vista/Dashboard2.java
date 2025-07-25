@@ -8,41 +8,39 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
-public class Dashboard extends javax.swing.JFrame {
+public class Dashboard2 extends javax.swing.JFrame {
+    
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Dashboard2.class.getName());
 
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Dashboard.class.getName());
-
-    public Dashboard() {
+    public Dashboard2() {
         initComponents();
         InitStyles();
-        //SetDate();
+        SetDate();
         InitContent();
     }
-
-    private void InitStyles() {
-        //mensaje.putClientProperty("FlatLaf.style", "font: 14 $light.font");
-        //mensaje.setForeground(Color.black);
-//        navText.putClientProperty("FlatLaf.style", "font: bold $h3.regular.font");
-//        navText.setForeground(Color.white);
-//        dateText.putClientProperty("FlatLaf.style", "font: 24 $light.font");
-//        dateText.setForeground(Color.white);
+    
+        private void InitStyles() {
+        mensaje.putClientProperty("FlatLaf.style", "font: 14 $light.font");
+        mensaje.setForeground(Color.black);
+        navText.putClientProperty("FlatLaf.style", "font: bold $h3.regular.font");
+        navText.setForeground(Color.white);
+        dateText.putClientProperty("FlatLaf.style", "font: 24 $light.font");
+        dateText.setForeground(Color.white);
         appName.putClientProperty("FlatLaf.style", "font: bold $h1.regular.font");
         appName.setForeground(Color.white);
     }
 
-//    private void SetDate() {
-//        LocalDate now = LocalDate.now();
-//        Locale spanishLocale = new Locale("es", "ES");
-//        dateText.setText(now.format(DateTimeFormatter.ofPattern("'Hoy es' EEEE dd 'de' MMMM 'de' yyyy", spanishLocale)));
-//    }
+    private void SetDate() {
+        LocalDate now = LocalDate.now();
+        Locale spanishLocale = new Locale("es", "ES");
+        dateText.setText(now.format(DateTimeFormatter.ofPattern("'Hoy es' EEEE dd 'de' MMMM 'de' yyyy", spanishLocale)));
+    }
 
     private void InitContent() {
         ShowJPanel(new Principal());
-        Showheader(new Header2());
     }
 
     public static void ShowJPanel(JPanel p) {
@@ -53,16 +51,6 @@ public class Dashboard extends javax.swing.JFrame {
         content.add(p, BorderLayout.CENTER);
         content.revalidate();
         content.repaint();
-    }
-
-    public static void Showheader(JPanel p) {
-        p.setSize(750, 150);
-        p.setLocation(0, 0);
-
-        header.removeAll();
-        header.add(p, BorderLayout.CENTER);
-        header.revalidate();
-        header.repaint();
     }
 
     @SuppressWarnings("unchecked")
@@ -81,7 +69,9 @@ public class Dashboard extends javax.swing.JFrame {
         btn_cierres = new javax.swing.JButton();
         content = new javax.swing.JPanel();
         header = new javax.swing.JPanel();
-        tipoPedido = new javax.swing.JPanel();
+        navText = new javax.swing.JLabel();
+        dateText = new javax.swing.JLabel();
+        mensaje = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -264,11 +254,35 @@ public class Dashboard extends javax.swing.JFrame {
         content.setBackground(new java.awt.Color(255, 255, 255));
         content.setLayout(new java.awt.BorderLayout());
 
-        header.setBackground(new java.awt.Color(255, 255, 255));
+        header.setBackground(new java.awt.Color(25, 118, 210));
         header.setPreferredSize(new java.awt.Dimension(744, 150));
-        header.setLayout(new java.awt.BorderLayout());
 
-        tipoPedido.setLayout(new java.awt.BorderLayout());
+        navText.setText("Administración/Control/El Rayo");
+
+        dateText.setText("Hoy es {dayname} {day} de {month} de {year}");
+
+        javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
+        header.setLayout(headerLayout);
+        headerLayout.setHorizontalGroup(
+            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(headerLayout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(navText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dateText, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE))
+                .addContainerGap(310, Short.MAX_VALUE))
+        );
+        headerLayout.setVerticalGroup(
+            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(headerLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(navText, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(dateText, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
+        mensaje.setText("Bienvenido");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -276,21 +290,24 @@ public class Dashboard extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(header, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
-                    .addComponent(tipoPedido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(header, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
                     .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tipoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(1, 1, 1))
         );
 
         pack();
@@ -299,7 +316,6 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void btn_principalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_principalActionPerformed
         ShowJPanel(new Principal());
-        Showheader(new Header2());
     }//GEN-LAST:event_btn_principalActionPerformed
 
     private void btn_clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clientesActionPerformed
@@ -308,48 +324,26 @@ public class Dashboard extends javax.swing.JFrame {
         } catch (Exception ex) {
             logger.log(Level.SEVERE, null, ex);
         }
-        Showheader(new Header2());
     }//GEN-LAST:event_btn_clientesActionPerformed
 
     private void btn_motorizadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_motorizadosActionPerformed
-
-        try {
-            ShowJPanel(new Motorizados());
-        } catch (Exception ex) {
-            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
         ShowJPanel(new Motorizados());
-        Showheader(new Header2());
-
     }//GEN-LAST:event_btn_motorizadosActionPerformed
 
     private void btn_restaurantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_restaurantesActionPerformed
-
-        try {
-            ShowJPanel(new Restaurantes());
-        } catch (Exception ex) {
-            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
         ShowJPanel(new Restaurantes());
-        Showheader(new Header2());
-
     }//GEN-LAST:event_btn_restaurantesActionPerformed
 
     private void btn_pedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pedidosActionPerformed
         ShowJPanel(new Pedidos());
-        Showheader(new TipoPedido2());
     }//GEN-LAST:event_btn_pedidosActionPerformed
 
     private void btn_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportesActionPerformed
         ShowJPanel(new Reportes());
-        Showheader(new Header2());
     }//GEN-LAST:event_btn_reportesActionPerformed
 
     private void btn_cierresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cierresActionPerformed
         ShowJPanel(new Cierres());
-        Showheader(new Header2());
     }//GEN-LAST:event_btn_cierresActionPerformed
 
     /**
@@ -360,7 +354,7 @@ public class Dashboard extends javax.swing.JFrame {
         FlatMaterialLighterIJTheme.setup();
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Dashboard().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new Dashboard2().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -373,9 +367,11 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton btn_reportes;
     private javax.swing.JButton btn_restaurantes;
     private static javax.swing.JPanel content;
-    private static javax.swing.JPanel header;
+    private javax.swing.JLabel dateText;
+    private javax.swing.JPanel header;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel mensaje;
     private javax.swing.JPanel menu;
-    private static javax.swing.JPanel tipoPedido;
+    private javax.swing.JLabel navText;
     // End of variables declaration//GEN-END:variables
 }

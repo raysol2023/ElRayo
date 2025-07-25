@@ -7,15 +7,15 @@ public class ControladorComanda {
 
     private ComandaDAO dao = new ComandaDAO();
     
-    public boolean registrarComanda(Comanda c) {
-      
-        c.calcularTarifa();
-
-        
-        if (c.getIdCliente() > 0 && c.getDistanciaKm() > 0) {
-            return dao.guardar(c);
-        }
-
-        return false;
-    }
+//    public boolean registrarComanda(Comanda c) {
+//      
+//        c.calcularTarifa();
+//
+//        
+//        if (c.getIdCliente() > 0 && c.getDistanciaKm() > 0) {
+//            return dao.guardar(c);
+//        }
+//
+//        return false;
+//    }
 }

@@ -4,17 +4,26 @@ import java.time.LocalDateTime;
 
 public class Comanda {
 
+    private int idComanda;
     private int idCliente;
     private Integer idRestaurante;
+    private Integer idMotorizado;
     private boolean requiereCompra;
     private double distanciaKm;
-    private double tarifaTotal;
     private LocalDateTime fechaHora;
 
-  
     private Cliente cliente;
     private Restaurante restaurante;
-    private int idComanda;
+
+    private TarifaComanda tarifa;
+    private DetallePago detallePago;
+
+    public Comanda() {
+        this.fechaHora = LocalDateTime.now();
+        this.tarifa = new TarifaComanda();
+        this.detallePago = new DetallePago();
+    }
+
 
     public int getIdComanda() {
         return idComanda;
@@ -23,34 +32,6 @@ public class Comanda {
     public void setIdComanda(int idComanda) {
         this.idComanda = idComanda;
     }
-
-    public Comanda() {
-    }
-
-    public Comanda(int idCliente, Integer idRestaurante, boolean requiereCompra,
-                   double distanciaKm, LocalDateTime fechaHora) {
-        this.idCliente = idCliente;
-        this.idRestaurante = idRestaurante;
-        this.requiereCompra = requiereCompra;
-        this.distanciaKm = distanciaKm;
-        this.fechaHora = fechaHora;
-        calcularTarifa();
-    }
-
-  
-    public void calcularTarifa() {
-        if (distanciaKm <= 3) {
-            tarifaTotal = 6;
-        } else {
-            tarifaTotal = distanciaKm * 2;
-        }
-
-        if (requiereCompra) {
-            tarifaTotal += 10;
-        }
-    }
-
-    // Getters y Setters
 
     public int getIdCliente() {
         return idCliente;
@@ -68,6 +49,14 @@ public class Comanda {
         this.idRestaurante = idRestaurante;
     }
 
+    public Integer getIdMotorizado() {
+        return idMotorizado;
+    }
+
+    public void setIdMotorizado(Integer idMotorizado) {
+        this.idMotorizado = idMotorizado;
+    }
+
     public boolean isRequiereCompra() {
         return requiereCompra;
     }
@@ -82,14 +71,6 @@ public class Comanda {
 
     public void setDistanciaKm(double distanciaKm) {
         this.distanciaKm = distanciaKm;
-    }
-
-    public double getTarifaTotal() {
-        return tarifaTotal;
-    }
-
-    public void setTarifaTotal(double tarifaTotal) {
-        this.tarifaTotal = tarifaTotal;
     }
 
     public LocalDateTime getFechaHora() {
@@ -114,5 +95,86 @@ public class Comanda {
 
     public void setRestaurante(Restaurante restaurante) {
         this.restaurante = restaurante;
+    }
+
+    public TarifaComanda getTarifa() {
+        return tarifa;
+    }
+
+    public void setTarifa(TarifaComanda tarifa) {
+        this.tarifa = tarifa;
+    }
+
+    public DetallePago getDetallePago() {
+        return detallePago;
+    }
+
+    public void setDetallePago(DetallePago detallePago) {
+        this.detallePago = detallePago;
+    }
+
+
+    public double getTarifaTotal() {
+        return tarifa.calcularTotal();
+    }
+
+    public void setTarifaTotal(double valor) {
+        // opcional, si decides almacenar el valor en tarifa (no lo necesitas si siempre recalculas)
+    }
+
+    public String getTipoPedido() {
+        return tarifa.getTipoPedido();
+    }
+
+    public void setTipoPedido(String tipo) {
+        tarifa.setTipoPedido(tipo);
+    }
+
+    public double getMontoPedido() {
+        return detallePago.getMontoPedido();
+    }
+
+    public void setMontoPedido(double monto) {
+        detallePago.setMontoPedido(monto);
+    }
+
+    public String getMetodoPago() {
+        return detallePago.getMetodoPago();
+    }
+
+    public void setMetodoPago(String metodoPago) {
+        detallePago.setMetodoPago(metodoPago);
+    }
+
+    public boolean isPagado() {
+        return detallePago.isPagado();
+    }
+
+    public void setPagado(boolean pagado) {
+        detallePago.setPagado(pagado);
+    }
+
+    public String getObservacion() {
+        return detallePago.getObservacion();
+    }
+
+    public void setObservacion(String obs) {
+        detallePago.setObservacion(obs);
+    }
+
+    public double getComision() {
+        return tarifa.getComision();
+    }
+
+    public void setComision(double comision) {
+        tarifa.setComision(comision);
+    }
+
+    public double getPenalidad() {
+        return tarifa.getPenalidad();
+    }
+
+    public void setPenalidad(double penalidad) {
+        tarifa.setPenalidad(penalidad);
     }
 }
