@@ -39,9 +39,9 @@ public class Principal extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setPreferredSize(new java.awt.Dimension(750, 430));
+        setPreferredSize(new java.awt.Dimension(750, 510));
 
-        bg.setBackground(new java.awt.Color(255, 255, 255));
+        bg.setBackground(new java.awt.Color(245, 247, 250));
         bg.setPreferredSize(new java.awt.Dimension(750, 430));
 
         title.setText("Principal");

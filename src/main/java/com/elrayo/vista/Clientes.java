@@ -392,7 +392,7 @@ public class Clientes extends javax.swing.JPanel {
         if (tbCliente.getSelectedRow() > -1) {
             try {
                 int clienteId = (int) tbCliente.getValueAt(tbCliente.getSelectedRow(), 0);
-                Dashboard.ShowJPanel(new ClientesUp(objControladorCliente.editarUnCliente(clienteId)));
+                Dashboard.ShowJPanelContent(new ClientesUp(objControladorCliente.editarUnCliente(clienteId)));
 //                System.out.println(clienteId);
 //                System.out.println(objControladorCliente.editarUnCliente(clienteId).toString());
             } catch (Exception e) {
@@ -404,7 +404,7 @@ public class Clientes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        Dashboard.ShowJPanel(new ClientesUp());
+        Dashboard.ShowJPanelContent(new ClientesUp());
     }//GEN-LAST:event_btnNuevoActionPerformed
 
 

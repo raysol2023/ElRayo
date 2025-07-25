@@ -16,36 +16,24 @@ public class Dashboard extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Dashboard.class.getName());
 
-    public Dashboard() {
+    public Dashboard() throws Exception {
         initComponents();
         InitStyles();
-        //SetDate();
         InitContent();
     }
 
     private void InitStyles() {
-        //mensaje.putClientProperty("FlatLaf.style", "font: 14 $light.font");
-        //mensaje.setForeground(Color.black);
-//        navText.putClientProperty("FlatLaf.style", "font: bold $h3.regular.font");
-//        navText.setForeground(Color.white);
-//        dateText.putClientProperty("FlatLaf.style", "font: 24 $light.font");
-//        dateText.setForeground(Color.white);
         appName.putClientProperty("FlatLaf.style", "font: bold $h1.regular.font");
         appName.setForeground(Color.white);
     }
 
-//    private void SetDate() {
-//        LocalDate now = LocalDate.now();
-//        Locale spanishLocale = new Locale("es", "ES");
-//        dateText.setText(now.format(DateTimeFormatter.ofPattern("'Hoy es' EEEE dd 'de' MMMM 'de' yyyy", spanishLocale)));
-//    }
-
-    private void InitContent() {
-        ShowJPanel(new Principal());
-        Showheader(new Header2());
+    private void InitContent() throws Exception {
+        ShowJPanelContent(new Principal());
+        ShowJPanelheader(new Header());
+        ShowJPanelTP(new Central());
     }
 
-    public static void ShowJPanel(JPanel p) {
+    public static void ShowJPanelContent(JPanel p) {
         p.setSize(750, 430);
         p.setLocation(0, 0);
 
@@ -55,7 +43,7 @@ public class Dashboard extends javax.swing.JFrame {
         content.repaint();
     }
 
-    public static void Showheader(JPanel p) {
+    public static void ShowJPanelheader(JPanel p) {
         p.setSize(750, 150);
         p.setLocation(0, 0);
 
@@ -63,6 +51,22 @@ public class Dashboard extends javax.swing.JFrame {
         header.add(p, BorderLayout.CENTER);
         header.revalidate();
         header.repaint();
+    }
+
+    public static void ShowJPanelTP(JPanel p) {
+        p.setSize(750, 150);
+        p.setLocation(0, 0);
+
+        tipoPedido.removeAll();
+        tipoPedido.add(p, BorderLayout.CENTER);
+        tipoPedido.revalidate();
+        tipoPedido.repaint();
+    }
+
+    public static void mostrable(JPanel p1, JPanel p2, JPanel p3) {
+        ShowJPanelTP(p1);
+        ShowJPanelheader(p2);
+        ShowJPanelContent(p3);
     }
 
     @SuppressWarnings("unchecked")
@@ -85,12 +89,13 @@ public class Dashboard extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        menu.setBackground(new java.awt.Color(13, 71, 161));
+        menu.setBackground(new java.awt.Color(13, 72, 160));
         menu.setPreferredSize(new java.awt.Dimension(270, 640));
 
         appName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         appName.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.png"))); // NOI18N
         appName.setText("El Rayo");
+        appName.setIconTextGap(13);
 
         jSeparator1.setPreferredSize(new java.awt.Dimension(50, 5));
 
@@ -101,7 +106,7 @@ public class Dashboard extends javax.swing.JFrame {
         btn_principal.setText("Principal");
         btn_principal.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_principal.setBorderPainted(false);
-        btn_principal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_principal.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_principal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_principal.setIconTextGap(13);
         btn_principal.setInheritsPopupMenu(true);
@@ -118,7 +123,7 @@ public class Dashboard extends javax.swing.JFrame {
         btn_clientes.setText("Clientes");
         btn_clientes.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_clientes.setBorderPainted(false);
-        btn_clientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_clientes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_clientes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_clientes.setIconTextGap(13);
         btn_clientes.setInheritsPopupMenu(true);
@@ -135,7 +140,7 @@ public class Dashboard extends javax.swing.JFrame {
         btn_motorizados.setText("Motorizados");
         btn_motorizados.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_motorizados.setBorderPainted(false);
-        btn_motorizados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_motorizados.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_motorizados.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_motorizados.setIconTextGap(13);
         btn_motorizados.setInheritsPopupMenu(true);
@@ -152,7 +157,7 @@ public class Dashboard extends javax.swing.JFrame {
         btn_restaurantes.setText("Restaurantes");
         btn_restaurantes.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_restaurantes.setBorderPainted(false);
-        btn_restaurantes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_restaurantes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_restaurantes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_restaurantes.setIconTextGap(13);
         btn_restaurantes.setInheritsPopupMenu(true);
@@ -169,7 +174,7 @@ public class Dashboard extends javax.swing.JFrame {
         btn_pedidos.setText("Pedidos");
         btn_pedidos.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_pedidos.setBorderPainted(false);
-        btn_pedidos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_pedidos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_pedidos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_pedidos.setIconTextGap(13);
         btn_pedidos.setInheritsPopupMenu(true);
@@ -186,7 +191,7 @@ public class Dashboard extends javax.swing.JFrame {
         btn_reportes.setText("Reportes");
         btn_reportes.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_reportes.setBorderPainted(false);
-        btn_reportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_reportes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_reportes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_reportes.setIconTextGap(13);
         btn_reportes.setInheritsPopupMenu(true);
@@ -203,7 +208,7 @@ public class Dashboard extends javax.swing.JFrame {
         btn_cierres.setText("Cierres");
         btn_cierres.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_cierres.setBorderPainted(false);
-        btn_cierres.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_cierres.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_cierres.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_cierres.setIconTextGap(13);
         btn_cierres.setInheritsPopupMenu(true);
@@ -262,12 +267,14 @@ public class Dashboard extends javax.swing.JFrame {
         );
 
         content.setBackground(new java.awt.Color(255, 255, 255));
+        content.setPreferredSize(new java.awt.Dimension(750, 510));
         content.setLayout(new java.awt.BorderLayout());
 
         header.setBackground(new java.awt.Color(255, 255, 255));
         header.setPreferredSize(new java.awt.Dimension(744, 150));
         header.setLayout(new java.awt.BorderLayout());
 
+        tipoPedido.setPreferredSize(new java.awt.Dimension(750, 60));
         tipoPedido.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -276,10 +283,10 @@ public class Dashboard extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(header, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(header, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tipoPedido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -288,9 +295,12 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(59, 59, 59)
-                        .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tipoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(header, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tipoPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(149, 149, 149)))
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(1, 1, 1))
         );
 
         pack();
@@ -298,58 +308,68 @@ public class Dashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_principalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_principalActionPerformed
-        ShowJPanel(new Principal());
-        Showheader(new Header2());
+        try {
+            mostrable(new Central(), new Header(), new Principal());
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+            System.out.println("Erro al mostrar los panales: Central, Header, Principal " + ex.getMessage());
+        }
     }//GEN-LAST:event_btn_principalActionPerformed
 
     private void btn_clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clientesActionPerformed
         try {
-            ShowJPanel(new Clientes());
+            mostrable(new Central(), new Header(), new Clientes());
         } catch (Exception ex) {
             logger.log(Level.SEVERE, null, ex);
+            System.out.println("Erro al mostrar los panales: Central, Header, Clientes " + ex.getMessage());
         }
-        Showheader(new Header2());
     }//GEN-LAST:event_btn_clientesActionPerformed
 
     private void btn_motorizadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_motorizadosActionPerformed
-
         try {
-            ShowJPanel(new Motorizados());
+            mostrable(new Central(), new Header(), new Motorizados());
         } catch (Exception ex) {
-            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
+            System.out.println("Erro al mostrar los panales: Central, Header, Motorizados " + ex.getMessage());
         }
-
-        ShowJPanel(new Motorizados());
-        Showheader(new Header2());
 
     }//GEN-LAST:event_btn_motorizadosActionPerformed
 
     private void btn_restaurantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_restaurantesActionPerformed
-
         try {
-            ShowJPanel(new Restaurantes());
+            mostrable(new Central(), new Header(), new Restaurantes());
         } catch (Exception ex) {
-            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
+            System.out.println("Erro al mostrar los panales: Central, Header, Restaurantes " + ex.getMessage());
         }
-
-        ShowJPanel(new Restaurantes());
-        Showheader(new Header2());
 
     }//GEN-LAST:event_btn_restaurantesActionPerformed
 
     private void btn_pedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pedidosActionPerformed
-        ShowJPanel(new Pedidos());
-        Showheader(new TipoPedido2());
+        try {
+            mostrable(new Central(), new Header(), new Pedidos());
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+            System.out.println("Erro al mostrar los panales: Central, Header, Pedidos " + ex.getMessage());
+        }
     }//GEN-LAST:event_btn_pedidosActionPerformed
 
     private void btn_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportesActionPerformed
-        ShowJPanel(new Reportes());
-        Showheader(new Header2());
+        try {
+            mostrable(new Central(), new Header(), new Reportes());
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+            System.out.println("Erro al mostrar los panales: Central, Header, Reportes " + ex.getMessage());
+        }
     }//GEN-LAST:event_btn_reportesActionPerformed
 
     private void btn_cierresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cierresActionPerformed
-        ShowJPanel(new Cierres());
-        Showheader(new Header2());
+        try {
+            mostrable(new Central(), new Header(), new Cierres());
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+            System.out.println("Erro al mostrar los panales: Central, Header, Cierres " + ex.getMessage());
+        }
     }//GEN-LAST:event_btn_cierresActionPerformed
 
     /**
@@ -360,7 +380,13 @@ public class Dashboard extends javax.swing.JFrame {
         FlatMaterialLighterIJTheme.setup();
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Dashboard().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            try {
+                new Dashboard().setVisible(true);
+            } catch (Exception ex) {
+                logger.log(Level.SEVERE, null, ex);
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

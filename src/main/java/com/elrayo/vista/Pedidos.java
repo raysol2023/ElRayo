@@ -1,20 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.elrayo.vista;
 
 import java.awt.Color;
+import com.elrayo.vista.Dashboard;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-/**
- *
- * @author pablo
- */
 public class Pedidos extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Pedidos
-     */
     public Pedidos() {
         initComponents();
         InitStyles();
@@ -183,20 +175,7 @@ public class Pedidos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        //        DAOUsers dao = new DAOUsersImpl();
-        //        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        //        if (jTable1.getSelectedRows().length < 1) {
-            //            javax.swing.JOptionPane.showMessageDialog(this, "Debes seleccionar uno o más usuarios a eliminar.\n", "AVISO", javax.swing.JOptionPane.ERROR_MESSAGE);
-            //        } else {
-            //            for (int i : jTable1.getSelectedRows()) {
-                //                try {
-                    //                    dao.eliminar((int) jTable1.getValueAt(i, 0));
-                    //                    model.removeRow(i);
-                    //                } catch (Exception e) {
-                    //                    System.out.println(e.getMessage());
-                    //                }
-                //            }
-            //        }
+
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
@@ -214,7 +193,12 @@ public class Pedidos extends javax.swing.JPanel {
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        //Dashboard.ShowJPanel(new UpUsers());
+        try {
+            Dashboard.mostrable(new TipoPedido(), new TPRegular(), new Pedidos());
+        } catch (Exception ex) {
+            Logger.getLogger(Pedidos.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error la mostrar Tipo de pedido, Regular y Pedidos: "+ex.getMessage());
+        }
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
