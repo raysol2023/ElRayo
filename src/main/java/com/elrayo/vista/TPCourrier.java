@@ -1,6 +1,8 @@
 package com.elrayo.vista;
 
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TPCourrier extends javax.swing.JPanel {
 
@@ -31,7 +33,7 @@ public class TPCourrier extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(700, 150));
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
-        bg.setPreferredSize(new java.awt.Dimension(750, 430));
+        bg.setPreferredSize(new java.awt.Dimension(750, 150));
 
         title.setText("Tarifa Corrier: S/ 2 por Km. Con una base de S/ 6.00, más S/ 5.00 por servicio de compra.");
 
@@ -124,7 +126,7 @@ public class TPCourrier extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -133,7 +135,11 @@ public class TPCourrier extends javax.swing.JPanel {
     }//GEN-LAST:event_addButton1ActionPerformed
 
     private void addButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButton2ActionPerformed
-        Dashboard.ShowJPanelContent(new DatosPedido());
+        try {
+            Dashboard.ShowJPanelContent(new DatosPedido());
+        } catch (Exception ex) {
+            Logger.getLogger(TPCourrier.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_addButton2ActionPerformed
 
 

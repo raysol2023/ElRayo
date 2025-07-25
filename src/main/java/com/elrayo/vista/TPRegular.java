@@ -1,16 +1,30 @@
 package com.elrayo.vista;
 
+import com.elrayo.entidad.SesionComanda;
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class TPRegular extends javax.swing.JPanel {
 
     public TPRegular() {
         initComponents();
-        InitStyles();    }
+        InitStyles();
+    }
 
     private void InitStyles() {
         title.putClientProperty("FlatLaf.style", "font: light $h4.regular.font");
         title.setForeground(Color.black);
+    }
+
+    Double calcular() {
+        double distancia = Double.parseDouble(txtDistancia.getText());
+        if (distancia >= 3) {
+            return Double.parseDouble(txtDistancia.getText()) * 2;
+        } else {
+            return 6.00;
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -20,30 +34,30 @@ public class TPRegular extends javax.swing.JPanel {
         bg = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
         nameLbl = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
-        addButton1 = new javax.swing.JButton();
-        txtNombre1 = new javax.swing.JTextField();
+        txtDistancia = new javax.swing.JTextField();
+        btnCalcular = new javax.swing.JButton();
+        txtMonto = new javax.swing.JTextField();
         nameLbl2 = new javax.swing.JLabel();
         addButton2 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(700, 150));
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
-        bg.setPreferredSize(new java.awt.Dimension(750, 430));
+        bg.setPreferredSize(new java.awt.Dimension(750, 150));
 
         title.setText("Tarifa Regular: S/ 2 por Km. Con una base de S/ 6.00");
 
         nameLbl.setText("Disntancia Km");
 
-        addButton1.setBackground(new java.awt.Color(18, 90, 173));
-        addButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        addButton1.setForeground(new java.awt.Color(255, 255, 255));
-        addButton1.setText("Calcular");
-        addButton1.setBorderPainted(false);
-        addButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        addButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCalcular.setBackground(new java.awt.Color(18, 90, 173));
+        btnCalcular.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnCalcular.setForeground(new java.awt.Color(255, 255, 255));
+        btnCalcular.setText("Calcular");
+        btnCalcular.setBorderPainted(false);
+        btnCalcular.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCalcular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButton1ActionPerformed(evt);
+                btnCalcularActionPerformed(evt);
             }
         });
 
@@ -72,16 +86,14 @@ public class TPRegular extends javax.swing.JPanel {
                     .addGroup(bgLayout.createSequentialGroup()
                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(txtNombre))
+                            .addComponent(txtDistancia))
                         .addGap(18, 18, 18)
-                        .addComponent(addButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addComponent(nameLbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(208, 208, 208)
+                            .addComponent(nameLbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(addButton2)
                         .addGap(45, 45, 45)))
                 .addContainerGap())
@@ -97,10 +109,10 @@ public class TPRegular extends javax.swing.JPanel {
                     .addComponent(nameLbl2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNombre1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(txtMonto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                     .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(addButton1)
+                        .addComponent(txtDistancia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCalcular)
                         .addComponent(addButton2)))
                 .addGap(33, 33, 33))
         );
@@ -113,27 +125,42 @@ public class TPRegular extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addButton1ActionPerformed
+    private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
+        if (!txtDistancia.getText().isEmpty()) {
+            double monto = calcular();
+            txtMonto.setText(String.valueOf(monto));
+            SesionComanda.setMontoDelivery(monto);
+            SesionComanda.setDistanciaKm(Double.parseDouble(txtDistancia.getText()));
+        } else {
+            JOptionPane.showMessageDialog(this, "Ingrese distancia");
+        }
+    }//GEN-LAST:event_btnCalcularActionPerformed
 
     private void addButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButton2ActionPerformed
-        Dashboard.ShowJPanelContent(new DatosPedido());
+        if (!txtDistancia.getText().isEmpty()) {
+            try {
+                Dashboard.ShowJPanelContent(new DatosPedido());
+            } catch (Exception ex) {
+                Logger.getLogger(TPRegular.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Ingrese distancia");
+        }
     }//GEN-LAST:event_addButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addButton1;
     private javax.swing.JButton addButton2;
     private javax.swing.JPanel bg;
+    private javax.swing.JButton btnCalcular;
     private javax.swing.JLabel nameLbl;
     private javax.swing.JLabel nameLbl2;
     private javax.swing.JLabel title;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNombre1;
+    private javax.swing.JTextField txtDistancia;
+    private javax.swing.JTextField txtMonto;
     // End of variables declaration//GEN-END:variables
 }

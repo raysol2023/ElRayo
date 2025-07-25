@@ -1,18 +1,83 @@
 package com.elrayo.vista;
 
+import com.elrayo.controlador.ControladorCliente;
+import com.elrayo.controlador.ControladorMotorizado;
+import com.elrayo.controlador.ControladorRestaurante;
+
+import com.elrayo.entidad.Cliente;
+import com.elrayo.entidad.ComandaTemporal;
+import com.elrayo.entidad.Restaurante;
+import com.elrayo.entidad.Motorizado;
+import com.elrayo.entidad.SesionComanda;
+
 import java.awt.Color;
+import java.awt.event.ItemEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DatosPedido extends javax.swing.JPanel {
 
-    public DatosPedido() {
+    ControladorCliente objControladorCliente = new ControladorCliente();
+    ControladorMotorizado objControladorMotorizado = new ControladorMotorizado();
+    ControladorRestaurante objControladorRestaurante = new ControladorRestaurante();
+
+    public DatosPedido() throws Exception {
         initComponents();
         InitStyles();
+        cargarClientes();
+        cargarRestaurantes();
+        cargarMotorizados();
+        importes();
     }
 
-    private void InitStyles() {
+    private void InitStyles() throws Exception {
         title.putClientProperty("FlatLaf.style", "font: light $h1.regular.font");
         title.setForeground(Color.black);
     }
+
+    void cargarClientes() throws Exception {
+        List<Cliente> listaClientes = objControladorCliente.mostrarClientes("");
+
+        for (Cliente cliente : listaClientes) {
+            cboCliente.addItem(cliente);
+        }
+    }
+
+    void cargarRestaurantes() throws Exception {
+        List<Restaurante> listaRestaurantes = objControladorRestaurante.mostrarRestaurantes("");
+
+        for (Restaurante restaurante : listaRestaurantes) {
+            cboRestaurant.addItem(restaurante);
+        }
+    }
+
+    void cargarMotorizados() throws Exception {
+        List<Motorizado> listaMotorizados = objControladorMotorizado.mostrarMotorizados("");
+
+        for (Motorizado motorizado : listaMotorizados) {
+            cboMotorizados.addItem(motorizado);
+        }
+    }
+    
+    void importes(){
+        txtImporte.setText(String.valueOf(SesionComanda.getComanda().getMontoPedido()));
+        txtDelivery.setText(String.valueOf(SesionComanda.getComanda().getMontoDelivery()));
+    }
+    
+    void resumen(){
+        double totalPedido = SesionComanda.getComanda().getMontoPedido()+SesionComanda.getComanda().getMontoDelivery();
+        Cliente clienteSeleccionado = (Cliente) cboCliente.getSelectedItem();
+        Restaurante restaurantSeleccionado = (Restaurante) cboRestaurant.getSelectedItem();
+        Motorizado motorizadoSeleccionado = (Motorizado) cboMotorizados.getSelectedItem();
+        SesionComanda.setIdCliente(clienteSeleccionado);
+        SesionComanda.setIdRestaurante(restaurantSeleccionado);
+        SesionComanda.setIdMotorizado(motorizadoSeleccionado);
+        SesionComanda.setObservacion(txtOservacion.getText());
+        SesionComanda.setTarifaTotal(totalPedido);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -21,26 +86,26 @@ public class DatosPedido extends javax.swing.JPanel {
         title = new javax.swing.JLabel();
         nameLbl = new javax.swing.JLabel();
         apPLbl = new javax.swing.JLabel();
-        txtDni = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         apMLbl = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         domLbl = new javax.swing.JLabel();
-        txtDomicilio = new javax.swing.JTextField();
-        btnRegistrar = new javax.swing.JButton();
-        cboPedidos = new javax.swing.JComboBox<>();
-        txtDni1 = new javax.swing.JTextField();
+        txtDelivery = new javax.swing.JTextField();
+        btnResumen = new javax.swing.JButton();
+        cboCliente = new javax.swing.JComboBox<>();
+        txtWhatsApp = new javax.swing.JTextField();
         apPLbl1 = new javax.swing.JLabel();
-        txtDni2 = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
         apMLbl1 = new javax.swing.JLabel();
-        cboPedidos1 = new javax.swing.JComboBox<>();
+        cboRestaurant = new javax.swing.JComboBox<>();
         domLbl1 = new javax.swing.JLabel();
-        txtDomicilio1 = new javax.swing.JTextField();
+        txtImporte = new javax.swing.JTextField();
         apMLbl2 = new javax.swing.JLabel();
-        cboPedidos2 = new javax.swing.JComboBox<>();
+        cboMotorizados = new javax.swing.JComboBox<>();
         apPLbl2 = new javax.swing.JLabel();
-        txtDni3 = new javax.swing.JTextField();
+        txtOservacion = new javax.swing.JTextField();
 
-        setPreferredSize(new java.awt.Dimension(750, 430));
+        setPreferredSize(new java.awt.Dimension(750, 510));
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
         bg.setPreferredSize(new java.awt.Dimension(750, 510));
@@ -49,9 +114,9 @@ public class DatosPedido extends javax.swing.JPanel {
 
         nameLbl.setText("Seleccione el cliente");
 
-        apPLbl.setText("Nombre");
+        apPLbl.setText("Nombre del cliente");
 
-        apMLbl.setText("WhatsApp");
+        apMLbl.setText("WhatsApp del cliente");
 
         jSeparator1.setForeground(new java.awt.Color(204, 204, 204));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -59,28 +124,28 @@ public class DatosPedido extends javax.swing.JPanel {
 
         domLbl.setText("Importe del delivery");
 
-        txtDomicilio.setToolTipText("");
+        txtDelivery.setToolTipText("");
 
-        btnRegistrar.setBackground(new java.awt.Color(18, 90, 173));
-        btnRegistrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnRegistrar.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegistrar.setText("Ver resumen");
-        btnRegistrar.setBorderPainted(false);
-        btnRegistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+        btnResumen.setBackground(new java.awt.Color(18, 90, 173));
+        btnResumen.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnResumen.setForeground(new java.awt.Color(255, 255, 255));
+        btnResumen.setText("Ver resumen");
+        btnResumen.setBorderPainted(false);
+        btnResumen.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnResumen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
+                btnResumenActionPerformed(evt);
             }
         });
 
-        cboPedidos.addItemListener(new java.awt.event.ItemListener() {
+        cboCliente.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cboPedidosItemStateChanged(evt);
+                cboClienteItemStateChanged(evt);
             }
         });
-        cboPedidos.addMouseListener(new java.awt.event.MouseAdapter() {
+        cboCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cboPedidosMouseClicked(evt);
+                cboClienteMouseClicked(evt);
             }
         });
 
@@ -88,31 +153,31 @@ public class DatosPedido extends javax.swing.JPanel {
 
         apMLbl1.setText("Restaurante");
 
-        cboPedidos1.addItemListener(new java.awt.event.ItemListener() {
+        cboRestaurant.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cboPedidos1ItemStateChanged(evt);
+                cboRestaurantItemStateChanged(evt);
             }
         });
-        cboPedidos1.addMouseListener(new java.awt.event.MouseAdapter() {
+        cboRestaurant.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cboPedidos1MouseClicked(evt);
+                cboRestaurantMouseClicked(evt);
             }
         });
 
         domLbl1.setText("Importe del pedido");
 
-        txtDomicilio1.setToolTipText("");
+        txtImporte.setToolTipText("");
 
         apMLbl2.setText("Motorizado");
 
-        cboPedidos2.addItemListener(new java.awt.event.ItemListener() {
+        cboMotorizados.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cboPedidos2ItemStateChanged(evt);
+                cboMotorizadosItemStateChanged(evt);
             }
         });
-        cboPedidos2.addMouseListener(new java.awt.event.MouseAdapter() {
+        cboMotorizados.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cboPedidos2MouseClicked(evt);
+                cboMotorizadosMouseClicked(evt);
             }
         });
 
@@ -138,25 +203,21 @@ public class DatosPedido extends javax.swing.JPanel {
                                 .addGap(186, 186, 186))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
                                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(cboPedidos1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtDni2, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cboPedidos, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cboRestaurant, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cboCliente, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(nameLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, bgLayout.createSequentialGroup()
-                                        .addComponent(apPLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(182, 182, 182))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, bgLayout.createSequentialGroup()
-                                        .addComponent(apMLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(180, 180, 180))
-                                    .addComponent(txtDni)
-                                    .addComponent(txtDni1))
+                                    .addComponent(txtNombre)
+                                    .addComponent(txtWhatsApp)
+                                    .addComponent(apPLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(apMLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(68, 68, 68)))
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(70, 70, 70)
                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDomicilio)
-                            .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtDomicilio1)
+                            .addComponent(txtDelivery)
+                            .addComponent(btnResumen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtImporte)
                             .addGroup(bgLayout.createSequentialGroup()
                                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(domLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -165,11 +226,11 @@ public class DatosPedido extends javax.swing.JPanel {
                             .addGroup(bgLayout.createSequentialGroup()
                                 .addComponent(apMLbl2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(118, 118, 118))
-                            .addComponent(cboPedidos2, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cboMotorizados, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(bgLayout.createSequentialGroup()
                                 .addComponent(apPLbl2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(120, 120, 120))
-                            .addComponent(txtDni3, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(txtOservacion, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(72, 72, 72))))
         );
         bgLayout.setVerticalGroup(
@@ -182,44 +243,44 @@ public class DatosPedido extends javax.swing.JPanel {
                     .addGroup(bgLayout.createSequentialGroup()
                         .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cboPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(apPLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(10, 10, 10)
-                        .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(apMLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDni1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(apPLbl1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(10, 10, 10)
-                        .addComponent(txtDni2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(apMLbl1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cboPedidos1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(bgLayout.createSequentialGroup()
                                 .addComponent(domLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(domLbl1, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDomicilio1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtImporte, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(apMLbl2, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cboPedidos2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cboMotorizados, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(31, 31, 31)
                                 .addComponent(apPLbl2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(10, 10, 10)
-                                .addComponent(txtDni3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtOservacion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(41, 41, 41)
-                                .addComponent(btnRegistrar))
+                                .addComponent(btnResumen))
                             .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(26, 26, 26))))
         );
@@ -236,51 +297,45 @@ public class DatosPedido extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-
-    }//GEN-LAST:event_btnRegistrarActionPerformed
-
-    private void cboPedidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboPedidosItemStateChanged
-        String tipoPedido = cboPedidos.getSelectedItem().toString();
-
-        switch (tipoPedido) {
-            case "Regular":
-            Dashboard.ShowJPanelheader(new TPRegular());
-            break;
-            case "Courrier":
-            Dashboard.ShowJPanelheader(new TPCourrier());
-            break;
-            case "Hora":
-            Dashboard.ShowJPanelheader(new TPHora());
-            break;
-            case "Comision":
-            Dashboard.ShowJPanelheader(new TPComision());
-            break;
-            case "Tarifa Plana":
-            Dashboard.ShowJPanelheader(new TPPlana());
-            break;
+    private void btnResumenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResumenActionPerformed
+        resumen();
+        try {
+            Dashboard.ShowJPanelContent(new ResumenPedidos());
+        } catch (Exception ex) {
+            Logger.getLogger(DatosPedido.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_cboPedidosItemStateChanged
+    }//GEN-LAST:event_btnResumenActionPerformed
 
-    private void cboPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboPedidosMouseClicked
+    private void cboClienteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboClienteItemStateChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            Cliente clienteSeleccionado = (Cliente) cboCliente.getSelectedItem();
+            if (clienteSeleccionado != null) {
+                txtNombre.setText(clienteSeleccionado.getNombre());
+                txtWhatsApp.setText(clienteSeleccionado.getTelefono());
+                txtDireccion.setText(clienteSeleccionado.getDireccion());
+            }
+        }
+    }//GEN-LAST:event_cboClienteItemStateChanged
 
-    }//GEN-LAST:event_cboPedidosMouseClicked
+    private void cboClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboClienteMouseClicked
 
-    private void cboPedidos1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboPedidos1ItemStateChanged
+    }//GEN-LAST:event_cboClienteMouseClicked
+
+    private void cboRestaurantItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboRestaurantItemStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_cboPedidos1ItemStateChanged
+    }//GEN-LAST:event_cboRestaurantItemStateChanged
 
-    private void cboPedidos1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboPedidos1MouseClicked
+    private void cboRestaurantMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboRestaurantMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_cboPedidos1MouseClicked
+    }//GEN-LAST:event_cboRestaurantMouseClicked
 
-    private void cboPedidos2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboPedidos2ItemStateChanged
+    private void cboMotorizadosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboMotorizadosItemStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_cboPedidos2ItemStateChanged
+    }//GEN-LAST:event_cboMotorizadosItemStateChanged
 
-    private void cboPedidos2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboPedidos2MouseClicked
+    private void cboMotorizadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboMotorizadosMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_cboPedidos2MouseClicked
+    }//GEN-LAST:event_cboMotorizadosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -291,20 +346,20 @@ public class DatosPedido extends javax.swing.JPanel {
     private javax.swing.JLabel apPLbl1;
     private javax.swing.JLabel apPLbl2;
     private javax.swing.JPanel bg;
-    private javax.swing.JButton btnRegistrar;
-    private javax.swing.JComboBox<String> cboPedidos;
-    private javax.swing.JComboBox<String> cboPedidos1;
-    private javax.swing.JComboBox<String> cboPedidos2;
+    private javax.swing.JButton btnResumen;
+    private javax.swing.JComboBox<Cliente> cboCliente;
+    private javax.swing.JComboBox<Motorizado> cboMotorizados;
+    private javax.swing.JComboBox<Restaurante> cboRestaurant;
     private javax.swing.JLabel domLbl;
     private javax.swing.JLabel domLbl1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel nameLbl;
     private javax.swing.JLabel title;
-    private javax.swing.JTextField txtDni;
-    private javax.swing.JTextField txtDni1;
-    private javax.swing.JTextField txtDni2;
-    private javax.swing.JTextField txtDni3;
-    private javax.swing.JTextField txtDomicilio;
-    private javax.swing.JTextField txtDomicilio1;
+    private javax.swing.JTextField txtDelivery;
+    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtImporte;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtOservacion;
+    private javax.swing.JTextField txtWhatsApp;
     // End of variables declaration//GEN-END:variables
 }

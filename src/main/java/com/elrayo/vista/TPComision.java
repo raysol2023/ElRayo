@@ -1,16 +1,27 @@
 package com.elrayo.vista;
 
+import com.elrayo.entidad.SesionComanda;
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class TPComision extends javax.swing.JPanel {
 
     public TPComision() {
         initComponents();
-        InitStyles();    }
+        InitStyles();
+    }
 
     private void InitStyles() {
         title.putClientProperty("FlatLaf.style", "font: light $h4.regular.font");
         title.setForeground(Color.black);
+    }
+
+    double calcular() {
+        double distancia = Double.parseDouble(txtDistancia.getText());
+        double valorPedido = Double.parseDouble(txtValorPedido.getText());
+        return distancia * 2 + valorPedido * 0.10;
     }
 
     @SuppressWarnings("unchecked")
@@ -20,18 +31,18 @@ public class TPComision extends javax.swing.JPanel {
         bg = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
         nameLbl = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
+        txtDistancia = new javax.swing.JTextField();
         addButton1 = new javax.swing.JButton();
-        txtNombre1 = new javax.swing.JTextField();
+        txtValorPedido = new javax.swing.JTextField();
         nameLbl2 = new javax.swing.JLabel();
         addButton2 = new javax.swing.JButton();
         nameLbl3 = new javax.swing.JLabel();
-        txtNombre2 = new javax.swing.JTextField();
+        txtMonto = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(700, 150));
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
-        bg.setPreferredSize(new java.awt.Dimension(750, 430));
+        bg.setPreferredSize(new java.awt.Dimension(750, 150));
 
         title.setText("Tarifa Hora: S/ 2 por Km más 10% del valor del pedido.");
 
@@ -76,7 +87,7 @@ public class TPComision extends javax.swing.JPanel {
                     .addGroup(bgLayout.createSequentialGroup()
                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(txtNombre))
+                            .addComponent(txtDistancia))
                         .addGap(18, 18, 18)
                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(bgLayout.createSequentialGroup()
@@ -84,11 +95,11 @@ public class TPComision extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(nameLbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(bgLayout.createSequentialGroup()
-                                .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtValorPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(addButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(addButton2)
                         .addGap(45, 45, 45)))
@@ -106,11 +117,11 @@ public class TPComision extends javax.swing.JPanel {
                     .addComponent(nameLbl3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDistancia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addButton2)
-                    .addComponent(txtNombre1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(txtValorPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                     .addComponent(addButton1)
-                    .addComponent(txtNombre2, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
+                    .addComponent(txtMonto, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
                 .addGap(32, 32, 32))
         );
 
@@ -122,16 +133,33 @@ public class TPComision extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButton2ActionPerformed
-        Dashboard.ShowJPanelContent(new DatosPedido());
+        if (!txtDistancia.getText().isEmpty() && !txtValorPedido.getText().isEmpty()) {
+            try {
+                Dashboard.ShowJPanelContent(new DatosPedido());
+                
+            } catch (Exception ex) {
+                Logger.getLogger(TPComision.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Ingrese distancia, valor del pedido");
+        }
     }//GEN-LAST:event_addButton2ActionPerformed
 
     private void addButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButton1ActionPerformed
-        // TODO add your handling code here:
+        if (!txtDistancia.getText().isEmpty() && !txtValorPedido.getText().isEmpty()) {
+            double monto = calcular();
+            txtMonto.setText(String.valueOf(monto));
+            SesionComanda.setMontoDelivery(monto);
+            SesionComanda.setMontoPedido(Double.parseDouble(txtValorPedido.getText()));
+            SesionComanda.setDistanciaKm(Double.parseDouble(txtDistancia.getText()));
+        } else {
+            JOptionPane.showMessageDialog(this, "Ingrese distancia, valor del pedido");
+        }
     }//GEN-LAST:event_addButton1ActionPerformed
 
 
@@ -143,8 +171,8 @@ public class TPComision extends javax.swing.JPanel {
     private javax.swing.JLabel nameLbl2;
     private javax.swing.JLabel nameLbl3;
     private javax.swing.JLabel title;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNombre1;
-    private javax.swing.JTextField txtNombre2;
+    private javax.swing.JTextField txtDistancia;
+    private javax.swing.JTextField txtMonto;
+    private javax.swing.JTextField txtValorPedido;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,7 +3,7 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[750, 430]"/>
+      <Dimension value="[750, 510]"/>
     </Property>
   </Properties>
   <AuxValues>
@@ -63,20 +63,14 @@
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="cboPedidos1" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtDni2" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="cboPedidos" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="cboRestaurant" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtDireccion" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="cboCliente" alignment="0" max="32767" attributes="0"/>
                                       <Component id="nameLbl" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="apPLbl" max="32767" attributes="0"/>
-                                          <EmptySpace min="182" pref="182" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="apMLbl" max="32767" attributes="0"/>
-                                          <EmptySpace min="180" pref="180" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="txtDni" max="32767" attributes="0"/>
-                                      <Component id="txtDni1" max="32767" attributes="0"/>
+                                      <Component id="txtNombre" max="32767" attributes="0"/>
+                                      <Component id="txtWhatsApp" max="32767" attributes="0"/>
+                                      <Component id="apPLbl" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="apMLbl" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                               </Group>
@@ -84,9 +78,9 @@
                           <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtDomicilio" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btnRegistrar" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtDomicilio1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtDelivery" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnResumen" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtImporte" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="domLbl" alignment="0" max="32767" attributes="0"/>
@@ -98,12 +92,12 @@
                                   <Component id="apMLbl2" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="cboPedidos2" alignment="1" max="32767" attributes="0"/>
+                              <Component id="cboMotorizados" alignment="1" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="apPLbl2" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="txtDni3" alignment="1" max="32767" attributes="0"/>
+                              <Component id="txtOservacion" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                       </Group>
@@ -121,23 +115,23 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="nameLbl" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cboPedidos" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="cboCliente" min="-2" pref="32" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="apPLbl" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                          <Component id="txtDni" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="txtNombre" min="-2" pref="32" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="apMLbl" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtDni1" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="txtWhatsApp" min="-2" pref="32" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="apPLbl1" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                          <Component id="txtDni2" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="txtDireccion" min="-2" pref="32" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="apMLbl1" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cboPedidos1" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="cboRestaurant" min="-2" pref="32" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -145,21 +139,21 @@
                               <Group type="102" attributes="0">
                                   <Component id="domLbl" pref="18" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtDomicilio" min="-2" pref="32" max="-2" attributes="0"/>
+                                  <Component id="txtDelivery" min="-2" pref="32" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="domLbl1" pref="18" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtDomicilio1" min="-2" pref="32" max="-2" attributes="0"/>
+                                  <Component id="txtImporte" min="-2" pref="32" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="apMLbl2" pref="17" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="cboPedidos2" min="-2" pref="32" max="-2" attributes="0"/>
+                                  <Component id="cboMotorizados" min="-2" pref="32" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                                   <Component id="apPLbl2" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                  <Component id="txtDni3" min="-2" pref="32" max="-2" attributes="0"/>
+                                  <Component id="txtOservacion" min="-2" pref="32" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                                  <Component id="btnRegistrar" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnResumen" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jSeparator1" max="32767" attributes="0"/>
                           </Group>
@@ -183,14 +177,14 @@
         </Component>
         <Component class="javax.swing.JLabel" name="apPLbl">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Nombre"/>
+            <Property name="text" type="java.lang.String" value="Nombre del cliente"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDni">
+        <Component class="javax.swing.JTextField" name="txtNombre">
         </Component>
         <Component class="javax.swing.JLabel" name="apMLbl">
           <Properties>
-            <Property name="text" type="java.lang.String" value="WhatsApp"/>
+            <Property name="text" type="java.lang.String" value="WhatsApp del cliente"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator1">
@@ -209,12 +203,12 @@
             <Property name="text" type="java.lang.String" value="Importe del delivery"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDomicilio">
+        <Component class="javax.swing.JTextField" name="txtDelivery">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnRegistrar">
+        <Component class="javax.swing.JButton" name="btnResumen">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ad" green="5a" red="12" type="rgb"/>
@@ -232,49 +226,49 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistrarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResumenActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cboPedidos">
+        <Component class="javax.swing.JComboBox" name="cboCliente">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cboPedidosItemStateChanged"/>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cboPedidosMouseClicked"/>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cboClienteItemStateChanged"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cboClienteMouseClicked"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Cliente&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDni1">
+        <Component class="javax.swing.JTextField" name="txtWhatsApp">
         </Component>
         <Component class="javax.swing.JLabel" name="apPLbl1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Doreccion de entrega"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDni2">
+        <Component class="javax.swing.JTextField" name="txtDireccion">
         </Component>
         <Component class="javax.swing.JLabel" name="apMLbl1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Restaurante"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cboPedidos1">
+        <Component class="javax.swing.JComboBox" name="cboRestaurant">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cboPedidos1ItemStateChanged"/>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cboPedidos1MouseClicked"/>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cboRestaurantItemStateChanged"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cboRestaurantMouseClicked"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Restaurante&gt;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="domLbl1">
@@ -282,7 +276,7 @@
             <Property name="text" type="java.lang.String" value="Importe del pedido"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDomicilio1">
+        <Component class="javax.swing.JTextField" name="txtImporte">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
@@ -292,18 +286,18 @@
             <Property name="text" type="java.lang.String" value="Motorizado"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cboPedidos2">
+        <Component class="javax.swing.JComboBox" name="cboMotorizados">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cboPedidos2ItemStateChanged"/>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cboPedidos2MouseClicked"/>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cboMotorizadosItemStateChanged"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cboMotorizadosMouseClicked"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Motorizado&gt;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="apPLbl2">
@@ -311,7 +305,7 @@
             <Property name="text" type="java.lang.String" value="Observacion"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDni3">
+        <Component class="javax.swing.JTextField" name="txtOservacion">
         </Component>
       </SubComponents>
     </Container>

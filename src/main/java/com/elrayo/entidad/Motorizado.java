@@ -44,4 +44,10 @@ public class Motorizado extends Persona implements IReportable {
     public String generarReporte() {
         return "Reporte del motorizado: " + this.nombre;
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
+    
 }

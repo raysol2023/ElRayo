@@ -2,12 +2,11 @@ package com.elrayo.vista;
 import com.elrayo.vista.Dashboard;
 
 import com.elrayo.controlador.ControladorCliente;
+import com.elrayo.entidad.SesionComanda;
 import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 
 public class TipoPedido extends javax.swing.JPanel {
-
-    ControladorCliente objControladorCliente = new ControladorCliente();
 
     public TipoPedido() throws Exception {
         initComponents();
@@ -17,6 +16,30 @@ public class TipoPedido extends javax.swing.JPanel {
     private void InitStyles() {
         title.putClientProperty("FlatLaf.style", "font: light $h2.regular.font");
         title.setForeground(Color.black);
+    }
+    
+    void showOptions(){
+        String optionSelected = cboPedidos.getSelectedItem().toString();
+        Dashboard.ShowJPanelContent(new Pedidos());
+        SesionComanda.setTipoPedido(optionSelected);
+
+        switch (optionSelected) {
+            case "Regular":
+                Dashboard.ShowJPanelheader(new TPRegular());
+                break;
+            case "Courrier":
+                Dashboard.ShowJPanelheader(new TPCourrier());
+                break;
+            case "Hora":
+                Dashboard.ShowJPanelheader(new TPHora());
+                break;
+            case "Comision":
+                Dashboard.ShowJPanelheader(new TPComision());
+                break;
+            case "Tarifa Plana":
+                Dashboard.ShowJPanelheader(new TPPlana());
+                break;
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -30,7 +53,7 @@ public class TipoPedido extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(750, 60));
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
-        bg.setPreferredSize(new java.awt.Dimension(750, 430));
+        bg.setPreferredSize(new java.awt.Dimension(750, 60));
 
         title.setText("Tipos de pedidos: Selecciona uno");
 
@@ -78,37 +101,17 @@ public class TipoPedido extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void cboPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboPedidosMouseClicked
         
-
     }//GEN-LAST:event_cboPedidosMouseClicked
 
     private void cboPedidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboPedidosItemStateChanged
-        String tipoPedido = cboPedidos.getSelectedItem().toString();
-        Dashboard.ShowJPanelContent(new Pedidos());
-
-        switch (tipoPedido) {
-            case "Regular":
-                Dashboard.ShowJPanelheader(new TPRegular());
-                break;
-            case "Courrier":
-                Dashboard.ShowJPanelheader(new TPCourrier());
-                break;
-            case "Hora":
-                Dashboard.ShowJPanelheader(new TPHora());
-                break;
-            case "Comision":
-                Dashboard.ShowJPanelheader(new TPComision());
-                break;
-            case "Tarifa Plana":
-                Dashboard.ShowJPanelheader(new TPPlana());
-                break;
-        }
+       showOptions(); 
     }//GEN-LAST:event_cboPedidosItemStateChanged
 
 

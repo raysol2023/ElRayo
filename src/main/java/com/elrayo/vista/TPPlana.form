@@ -51,14 +51,14 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="nameLbl" pref="100" max="32767" attributes="0"/>
-                              <Component id="txtNombre" max="32767" attributes="0"/>
+                              <Component id="txtDistancia" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="addButton1" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="nameLbl2" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="txtNombre1" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="txtMonto" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="208" max="32767" attributes="0"/>
                           <Component id="addButton2" min="-2" max="-2" attributes="0"/>
@@ -81,9 +81,9 @@
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txtNombre1" alignment="1" pref="34" max="32767" attributes="0"/>
+                      <Component id="txtMonto" alignment="1" pref="34" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtNombre" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="txtDistancia" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="addButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="addButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -97,6 +97,9 @@
         <Component class="javax.swing.JLabel" name="title">
           <Properties>
             <Property name="text" type="java.lang.String" value="Tarifa Plana: S/ 2 por Km. Con una base de S/ 7.00"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[750, 150]"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="nameLbl">
@@ -104,7 +107,7 @@
             <Property name="text" type="java.lang.String" value="Disntancia Km"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtNombre">
+        <Component class="javax.swing.JTextField" name="txtDistancia">
         </Component>
         <Component class="javax.swing.JButton" name="addButton1">
           <Properties>
@@ -127,7 +130,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addButton1ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtNombre1">
+        <Component class="javax.swing.JTextField" name="txtMonto">
         </Component>
         <Component class="javax.swing.JLabel" name="nameLbl2">
           <Properties>
