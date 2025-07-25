@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.SwingConstants;
 
-public class Clientes extends javax.swing.JPanel {
+public class TipoPedido extends javax.swing.JPanel {
 
     ControladorCliente objControladorCliente = new ControladorCliente();
 
@@ -36,7 +36,7 @@ public class Clientes extends javax.swing.JPanel {
         }
     };
 
-    public Clientes() throws Exception {
+    public TipoPedido() throws Exception {
         initComponents();
 
         tbCliente.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -341,7 +341,7 @@ public class Clientes extends javax.swing.JPanel {
             cargarTabla(txtBusqueda.getText());
             System.out.println("Tabla cargada");
         } catch (Exception ex) {
-            Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TipoPedido.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Error al cargar la tabla: "+ex.getMessage());
         }
     }//GEN-LAST:event_searchButtonActionPerformed
@@ -368,7 +368,7 @@ public class Clientes extends javax.swing.JPanel {
                         continue;
                     }
                 } catch (Exception ex) {
-                    Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(TipoPedido.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 try {
@@ -382,7 +382,7 @@ public class Clientes extends javax.swing.JPanel {
             try {
                 cargarTabla("");
             } catch (Exception ex) {
-                Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TipoPedido.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
