@@ -9,17 +9,37 @@ public class ControladorMotorizado {
 
     private MotorizadoDAO dao = new MotorizadoDAO();
 
-    public boolean registrarMotorizado(Motorizado m) {
-        if (ValidadorMotorizado.esDniValido(m.getDni())
-                && ValidadorMotorizado.esTelefonoValido(m.getTelefono())) {
-            dao.guardar(m);
+    public void registrarMotorizado(Motorizado ObjMotorizado) throws Exception {
+        if (ValidadorMotorizado.esDniValido(ObjMotorizado.getDni())
+                && ValidadorMotorizado.noVacioNombre(ObjMotorizado.getNombre())
+                && ValidadorMotorizado.esTelefonoValido(ObjMotorizado.getTelefono())) {
+            dao.registrar(ObjMotorizado);
+        }
+    }
+
+    public List<Motorizado> mostrarMotorizados(String name) throws Exception {
+        return dao.listar(name);
+    }
+
+    public boolean editarMotorizado(Motorizado ObjMotorizado) throws Exception {
+        if (ValidadorMotorizado.esDniValido(ObjMotorizado.getDni())
+                && ValidadorMotorizado.esTelefonoValido(ObjMotorizado.getTelefono())
+                && ValidadorMotorizado.noVacioNombre(ObjMotorizado.getNombre())) {
+            dao.modificar(ObjMotorizado);
             return true;
         }
         return false;
     }
 
-    public List<Motorizado> mostrarMotorizados() {
-        return dao.obtenerTodos();
+    public void eliminar(int id_motorizado) throws Exception {
+        dao.eliminar(id_motorizado);
     }
 
+    public boolean tieneComandas(int id_motorizado) throws Exception {
+        return dao.tieneComandas(id_motorizado);
+    }
+
+    public Motorizado editarUnMotorizado(int id_motorizado) throws Exception {
+        return dao.getMotorizadoById(id_motorizado);
+    }
 }

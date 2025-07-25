@@ -1,42 +1,120 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.elrayo.vista;
 
+import com.elrayo.vista.MotorizadosUp;
+import com.elrayo.controlador.ControladorMotorizado;
+import com.elrayo.entidad.Motorizado;
 import java.awt.Color;
+import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
-/**
- *
- * @author pablo
- */
 public class Motorizados extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Motorizados
-     */
-    public Motorizados() {
+    ControladorMotorizado objControladorMotorizado = new ControladorMotorizado();
+
+    DefaultTableModel modelo = new DefaultTableModel(
+            new String[]{"ID", "Nombre", "Dni", "Telefono", "Estado"}, 0) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return column != 3; // WhatsApp = columna 5 (index 5)
+        }
+    };
+
+    public Motorizados() throws Exception {
         initComponents();
+        cargarTabla("");
+
+        tbMotorizado.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tbMotorizado.setRowHeight(30);
+
+        // Alinea los encabezados a la izquierda
+        JTableHeader header = tbMotorizado.getTableHeader();
+        DefaultTableCellRenderer leftRenderer = (DefaultTableCellRenderer) header.getDefaultRenderer();
+        leftRenderer.setHorizontalAlignment(SwingConstants.LEFT);
+
         InitStyles();
+
+        SwingUtilities.invokeLater(() -> ajustarColumnasPorPorcentaje());
+
+        JScrollPane scrollPane = (JScrollPane) tbMotorizado.getParent().getParent();
+        scrollPane.addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                ajustarColumnasPorPorcentaje();
+            }
+        });
+
     }
 
     private void InitStyles() {
         title.putClientProperty("FlatLaf.style", "font: light $h1.regular.font");
         title.setForeground(Color.black);
     }
+
+    public void cargarTabla(String busqueda) throws Exception {
+        List<Motorizado> lista = objControladorMotorizado.mostrarMotorizados(busqueda);
+        modelo.setRowCount(0); // Limpia la tabla
+
+        for (Motorizado m : lista) {
+            Object[] fila = {
+                m.getIdMotorizado(), // ID (oculto)
+                m.getNombre(),
+                m.getDni(),
+                m.getTelefono(),
+                m.isActivo(),
+                "Ver"
+            };
+            modelo.addRow(fila);
+        }
+
+        tbMotorizado.setModel(modelo);
+        tbMotorizado.setRowHeight(30);
+
+        // Ocultar la columna ID (index 0)
+        tbMotorizado.getColumnModel().getColumn(0).setMinWidth(0);
+        tbMotorizado.getColumnModel().getColumn(0).setMaxWidth(0);
+        tbMotorizado.getColumnModel().getColumn(0).setWidth(0);
+
+        //agregarBotonWhatsApp(tbMotorizado, 3, 5); // Teléfono está en columna 3, botón en columna 5
+    }
+
+    public void ajustarColumnasPorPorcentaje() {
+        int totalWidth = tbMotorizado.getParent().getWidth();
+        if (totalWidth <= 0) {
+            return;
+        }
+
+        // Omitimos la columna ID (columna 0)
+        int[] porcentajes = {25, 10, 15, 35, 15}; // Para columnas 1 a 5
+
+        for (int i = 0; i < porcentajes.length; i++) {
+            int ancho = (totalWidth * porcentajes[i]) / 100;
+            tbMotorizado.getColumnModel().getColumn(i + 1).setPreferredWidth(ancho); // desplazado por la columna 0
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         bg = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
-        userSearch = new javax.swing.JTextField();
-        searchButton = new javax.swing.JButton();
+        txtBusqueda = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        deleteButton = new javax.swing.JButton();
-        editButton = new javax.swing.JButton();
-        addButton = new javax.swing.JButton();
+        tbMotorizado = new javax.swing.JTable();
+        btnEliminar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnNuevo = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(750, 430));
 
@@ -45,20 +123,20 @@ public class Motorizados extends javax.swing.JPanel {
 
         title.setText("Motorizados");
 
-        searchButton.setBackground(new java.awt.Color(18, 90, 173));
-        searchButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        searchButton.setForeground(new java.awt.Color(255, 255, 255));
-        searchButton.setText("Buscar");
-        searchButton.setBorderPainted(false);
-        searchButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        searchButton.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setBackground(new java.awt.Color(18, 90, 173));
+        btnBuscar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscar.setText("Buscar");
+        btnBuscar.setBorderPainted(false);
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchButtonActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbMotorizado.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        tbMotorizado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -74,47 +152,47 @@ public class Motorizados extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbMotorizado.getTableHeader().setReorderingAllowed(false);
+        tbMotorizado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTable1MousePressed(evt);
+                tbMotorizadoMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbMotorizado);
 
-        deleteButton.setBackground(new java.awt.Color(18, 90, 173));
-        deleteButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        deleteButton.setForeground(new java.awt.Color(255, 255, 255));
-        deleteButton.setText("Borrar");
-        deleteButton.setBorderPainted(false);
-        deleteButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setBackground(new java.awt.Color(18, 90, 173));
+        btnEliminar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar.setText("Borrar");
+        btnEliminar.setBorderPainted(false);
+        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteButtonActionPerformed(evt);
-            }
-        });
-
-        editButton.setBackground(new java.awt.Color(18, 90, 173));
-        editButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        editButton.setForeground(new java.awt.Color(255, 255, 255));
-        editButton.setText("Editar");
-        editButton.setBorderPainted(false);
-        editButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        editButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editButtonActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
 
-        addButton.setBackground(new java.awt.Color(18, 90, 173));
-        addButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        addButton.setForeground(new java.awt.Color(255, 255, 255));
-        addButton.setText("Nuevo");
-        addButton.setBorderPainted(false);
-        addButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        addButton.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setBackground(new java.awt.Color(18, 90, 173));
+        btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditar.setText("Editar");
+        btnEditar.setBorderPainted(false);
+        btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt);
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        btnNuevo.setBackground(new java.awt.Color(18, 90, 173));
+        btnNuevo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnNuevo.setForeground(new java.awt.Color(255, 255, 255));
+        btnNuevo.setText("Nuevo");
+        btnNuevo.setBorderPainted(false);
+        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
             }
         });
 
@@ -132,16 +210,16 @@ public class Motorizados extends javax.swing.JPanel {
                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(bgLayout.createSequentialGroup()
                                 .addGap(427, 427, 427)
-                                .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(bgLayout.createSequentialGroup()
-                                .addComponent(userSearch)
+                                .addComponent(txtBusqueda)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(searchButton)))
+                                .addComponent(btnBuscar)))
                         .addGap(50, 50, 50))))
         );
         bgLayout.setVerticalGroup(
@@ -151,15 +229,15 @@ public class Motorizados extends javax.swing.JPanel {
                 .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(userSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(deleteButton)
-                    .addComponent(editButton)
-                    .addComponent(addButton))
+                    .addComponent(btnEliminar)
+                    .addComponent(btnEditar)
+                    .addComponent(btnNuevo))
                 .addGap(25, 25, 25))
         );
 
@@ -175,66 +253,85 @@ public class Motorizados extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        //        try {
-            //            DAOUsers dao = new DAOUsersImpl();
-            //            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            //            model.setRowCount(0);
-            //            dao.listar(userSearch.getText()).forEach((u) -> model.addRow(new Object[]{u.getId(), u.getName(), u.getLast_name_p(), u.getLast_name_m(), u.getDomicilio(), u.getTel()}));
-            //        } catch (Exception e) {
-            //            System.out.println(e.getMessage());
-            //        }
-    }//GEN-LAST:event_searchButtonActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        try {
+            cargarTabla(txtBusqueda.getText());
+            System.out.println("Tabla cargada");
+        } catch (Exception ex) {
+            Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error al cargar la tabla: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+    private void tbMotorizadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMotorizadoMousePressed
 
-    }//GEN-LAST:event_jTable1MousePressed
+    }//GEN-LAST:event_tbMotorizadoMousePressed
 
-    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        //        DAOUsers dao = new DAOUsersImpl();
-        //        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        //        if (jTable1.getSelectedRows().length < 1) {
-            //            javax.swing.JOptionPane.showMessageDialog(this, "Debes seleccionar uno o más usuarios a eliminar.\n", "AVISO", javax.swing.JOptionPane.ERROR_MESSAGE);
-            //        } else {
-            //            for (int i : jTable1.getSelectedRows()) {
-                //                try {
-                    //                    dao.eliminar((int) jTable1.getValueAt(i, 0));
-                    //                    model.removeRow(i);
-                    //                } catch (Exception e) {
-                    //                    System.out.println(e.getMessage());
-                    //                }
-                //            }
-            //        }
-    }//GEN-LAST:event_deleteButtonActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        if (tbMotorizado.getSelectedRows().length < 1) {
+            JOptionPane.showMessageDialog(this, "Debes seleccionar uno o más motorizados a eliminar.\n", "AVISO", JOptionPane.ERROR_MESSAGE);
+        } else {
+            // Recorre en orden descendente para evitar errores al eliminar filas mientras iteras
+            int[] filas = tbMotorizado.getSelectedRows();
+            Arrays.sort(filas);
+            for (int j = filas.length - 1; j >= 0; j--) {
+                int i = filas[j];
+                int idMotorizado = (int) tbMotorizado.getValueAt(i, 0);
 
-    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        //        if (jTable1.getSelectedRow() > -1) {
-            //            try {
-                //                int userId = (int) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
-                //                DAOUsers dao = new DAOUsersImpl();
-                //                Dashboard.ShowJPanel(new UpUsers(dao.getUserById(userId)));
-                //            } catch (Exception e) {
-                //                System.out.println(e.getMessage());
-                //            }
-            //        } else {
-            //            javax.swing.JOptionPane.showMessageDialog(this, "Debes seleccionar el usuario a editar.\n", "AVISO", javax.swing.JOptionPane.ERROR_MESSAGE);
-            //        }
-    }//GEN-LAST:event_editButtonActionPerformed
+                try {
+                    if (objControladorMotorizado.tieneComandas(idMotorizado)) {
+                        JOptionPane.showMessageDialog(this, "No puedes eliminar al motorizado con ID " + idMotorizado + " porque tiene comandas registradas.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                        continue;
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        //Dashboard.ShowJPanel(new UpUsers());
-    }//GEN-LAST:event_addButtonActionPerformed
+                try {
+                    objControladorMotorizado.eliminar(idMotorizado);
+                    modelo.removeRow(i);
+                } catch (Exception e) {
+                    System.out.println("Error eliminando motorizado: " + e.getMessage());
+                }
+            }
+
+            try {
+                cargarTabla("");
+            } catch (Exception ex) {
+                Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        if (tbMotorizado.getSelectedRow() > -1) {
+            try {
+                int id_motorizado = (int) tbMotorizado.getValueAt(tbMotorizado.getSelectedRow(), 0);
+                //Dashboard.ShowJPanel(new MotorizadosUp(objControladorMotorizado.editarUnMotorizado(id_motorizado));
+//                System.out.println(clienteId);
+//                System.out.println(objControladorCliente.editarUnCliente(clienteId).toString());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Debes seleccionar el motorizado a editar.\n", "AVISO", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+            //Dashboard.ShowJPanel(new MotorizadosUp());
+    }//GEN-LAST:event_btnNuevoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addButton;
     private javax.swing.JPanel bg;
-    private javax.swing.JButton deleteButton;
-    private javax.swing.JButton editButton;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnNuevo;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JButton searchButton;
+    private javax.swing.JTable tbMotorizado;
     private javax.swing.JLabel title;
-    private javax.swing.JTextField userSearch;
+    private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
 }

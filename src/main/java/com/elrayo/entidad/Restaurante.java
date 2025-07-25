@@ -4,10 +4,10 @@ import com.elrayo.modelo.IReportable;
 
 public class Restaurante extends Persona implements IReportable {
 
-
+    private int idRestaurante;
     private String ruc;
     private boolean tieneConvenio;
-    private int id;
+    
 
     public Restaurante() {
     }
@@ -17,6 +17,14 @@ public class Restaurante extends Persona implements IReportable {
         this.tieneConvenio = tieneConvenio;
     }
 
+    public String getRuc() {
+        return ruc;
+    }
+
+    public void setRuc(String ruc) {
+        this.ruc = ruc;
+    }
+    
     public boolean isTieneConvenio() {
         return tieneConvenio;
     }
@@ -34,12 +42,12 @@ public class Restaurante extends Persona implements IReportable {
         return "Reporte general del restaurante: " + this.nombre;
     }
 
-    public int getId() {
-        return id;
+    public int getidRestaurante() {
+        return idRestaurante;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setidRestaurante(int idRestaurante) {
+        this.idRestaurante = idRestaurante;
     }
 
  @Override

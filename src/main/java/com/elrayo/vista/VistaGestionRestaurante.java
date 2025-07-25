@@ -10,10 +10,10 @@ public class VistaGestionRestaurante extends javax.swing.JFrame {
 
     public VistaGestionRestaurante() {
         initComponents();
-        cargarTabla();
+        //cargarTabla();
         
     }
-
+/*
     public void cargarTabla() {
         RestauranteDAO dao = new RestauranteDAO();
         List<Restaurante> lista = dao.obtenerTodos();
@@ -36,7 +36,7 @@ public class VistaGestionRestaurante extends javax.swing.JFrame {
 
         TablaRestaurantes.setModel(modelo);
     }
-
+*/
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -143,7 +143,7 @@ public class VistaGestionRestaurante extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        int fila = TablaRestaurantes.getSelectedRow();
+     /*   int fila = TablaRestaurantes.getSelectedRow();
         if (fila == -1) {
             JOptionPane.showMessageDialog(this, "⚠ Selecciona una fila para eliminar.");
             return;
@@ -162,11 +162,11 @@ public class VistaGestionRestaurante extends javax.swing.JFrame {
             cargarTabla();
         } else {
             JOptionPane.showMessageDialog(this, "❌ Error al eliminar.");
-        }
+        }*/
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        int fila = TablaRestaurantes.getSelectedRow();
+   /*     int fila = TablaRestaurantes.getSelectedRow();
         if (fila == -1) {
             JOptionPane.showMessageDialog(this, "⚠ Selecciona una fila para editar.");
             return;
@@ -197,11 +197,11 @@ public class VistaGestionRestaurante extends javax.swing.JFrame {
             cargarTabla();
         } else {
             JOptionPane.showMessageDialog(this, "❌ Error al actualizar.");
-        }
+        }*/
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String filtro = JOptionPane.showInputDialog(this, "🔎 Buscar por nombre o teléfono:");
+  /*      String filtro = JOptionPane.showInputDialog(this, "🔎 Buscar por nombre o teléfono:");
         if (filtro == null || filtro.trim().isEmpty()) {
             return;
         }
@@ -229,7 +229,7 @@ public class VistaGestionRestaurante extends javax.swing.JFrame {
             });
         }
 
-        TablaRestaurantes.setModel(modelo);
+        TablaRestaurantes.setModel(modelo);*/
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**

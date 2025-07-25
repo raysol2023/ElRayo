@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
+
 package com.elrayo.vista;
 
 import com.elrayo.controlador.ControladorRestaurante;
@@ -139,7 +136,7 @@ public class VistaRegistroRestaurante extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String nombre = txtNombre.getText().trim();
+        /*String nombre = txtNombre.getText().trim();
         String telefono = txtTelefono.getText().trim();
         String direccion = txtDireccion.getText().trim();
         boolean tieneConvenio = rbtSi.isSelected();
@@ -158,13 +155,11 @@ public class VistaRegistroRestaurante extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "❌ Verifica los datos ingresados.");
 
         }
-
+*/
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

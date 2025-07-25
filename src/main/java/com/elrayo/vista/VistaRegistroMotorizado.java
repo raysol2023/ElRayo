@@ -99,7 +99,7 @@ public class VistaRegistroMotorizado extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        String nombre = txtNombre.getText();
+       /* String nombre = txtNombre.getText();
         String telefono = txtTelefono.getText();
         String dni = txtDni.getText();
 
@@ -110,7 +110,7 @@ public class VistaRegistroMotorizado extends javax.swing.JDialog {
         if (padre != null) {
             padre.cargarTabla();
         }
-        this.dispose();
+        this.dispose();*/
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**

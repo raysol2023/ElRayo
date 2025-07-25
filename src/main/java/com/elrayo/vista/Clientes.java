@@ -30,7 +30,7 @@ public class Clientes extends javax.swing.JPanel {
     DefaultTableModel modelo = new DefaultTableModel(
             new String[]{"ID", "Nombre", "Dni", "Teléfono", "Dirección", "WhatsApp"}, 0
     ) {
-        @Override
+        @Override   
         public boolean isCellEditable(int row, int column) {
             return column != 3; // WhatsApp = columna 5 (index 5)
         }
@@ -141,12 +141,12 @@ public class Clientes extends javax.swing.JPanel {
         bg = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
         txtBusqueda = new javax.swing.JTextField();
-        searchButton = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbCliente = new javax.swing.JTable();
         btnEliminar = new javax.swing.JButton();
-        editButton = new javax.swing.JButton();
-        addButton = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnNuevo = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(750, 430));
 
@@ -155,15 +155,15 @@ public class Clientes extends javax.swing.JPanel {
 
         title.setText("Clientes");
 
-        searchButton.setBackground(new java.awt.Color(18, 90, 173));
-        searchButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        searchButton.setForeground(new java.awt.Color(255, 255, 255));
-        searchButton.setText("Buscar");
-        searchButton.setBorderPainted(false);
-        searchButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        searchButton.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setBackground(new java.awt.Color(18, 90, 173));
+        btnBuscar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscar.setText("Buscar");
+        btnBuscar.setBorderPainted(false);
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchButtonActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
@@ -197,34 +197,34 @@ public class Clientes extends javax.swing.JPanel {
         btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar.setText("Borrar");
         btnEliminar.setBorderPainted(false);
-        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
 
-        editButton.setBackground(new java.awt.Color(18, 90, 173));
-        editButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        editButton.setForeground(new java.awt.Color(255, 255, 255));
-        editButton.setText("Editar");
-        editButton.setBorderPainted(false);
-        editButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        editButton.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setBackground(new java.awt.Color(18, 90, 173));
+        btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditar.setText("Editar");
+        btnEditar.setBorderPainted(false);
+        btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editButtonActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
 
-        addButton.setBackground(new java.awt.Color(18, 90, 173));
-        addButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        addButton.setForeground(new java.awt.Color(255, 255, 255));
-        addButton.setText("Nuevo");
-        addButton.setBorderPainted(false);
-        addButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        addButton.addActionListener(new java.awt.event.ActionListener() {
+        btnNuevo.setBackground(new java.awt.Color(18, 90, 173));
+        btnNuevo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnNuevo.setForeground(new java.awt.Color(255, 255, 255));
+        btnNuevo.setText("Nuevo");
+        btnNuevo.setBorderPainted(false);
+        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt);
+                btnNuevoActionPerformed(evt);
             }
         });
 
@@ -244,13 +244,13 @@ public class Clientes extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
                         .addComponent(txtBusqueda)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchButton)
+                        .addComponent(btnBuscar)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
                         .addGap(459, 459, 459)
-                        .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
@@ -263,14 +263,14 @@ public class Clientes extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEliminar)
-                    .addComponent(editButton)
-                    .addComponent(addButton))
+                    .addComponent(btnEditar)
+                    .addComponent(btnNuevo))
                 .addGap(25, 25, 25))
         );
 
@@ -286,7 +286,7 @@ public class Clientes extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         try {
             cargarTabla(txtBusqueda.getText());
             System.out.println("Tabla cargada");
@@ -294,7 +294,7 @@ public class Clientes extends javax.swing.JPanel {
             Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Error al cargar la tabla: "+ex.getMessage());
         }
-    }//GEN-LAST:event_searchButtonActionPerformed
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void tbClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbClienteMousePressed
 
@@ -337,7 +337,7 @@ public class Clientes extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
         if (tbCliente.getSelectedRow() > -1) {
             try {
@@ -351,20 +351,20 @@ public class Clientes extends javax.swing.JPanel {
         } else {
             javax.swing.JOptionPane.showMessageDialog(this, "Debes seleccionar el cliente a editar.\n", "AVISO", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_editButtonActionPerformed
+    }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         Dashboard.ShowJPanel(new ClientesUp());
-    }//GEN-LAST:event_addButtonActionPerformed
+    }//GEN-LAST:event_btnNuevoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addButton;
     private javax.swing.JPanel bg;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton editButton;
+    private javax.swing.JButton btnNuevo;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton searchButton;
     private javax.swing.JTable tbCliente;
     private javax.swing.JLabel title;
     private javax.swing.JTextField txtBusqueda;

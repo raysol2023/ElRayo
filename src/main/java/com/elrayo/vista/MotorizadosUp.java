@@ -1,47 +1,44 @@
 package com.elrayo.vista;
 
-import com.elrayo.controlador.ControladorCliente;
-import com.elrayo.entidad.Cliente;
-
+import com.elrayo.controlador.ControladorMotorizado;
+import com.elrayo.entidad.Motorizado;
 import java.awt.Color;
 
+public class MotorizadosUp extends javax.swing.JFrame {
 
-public class ClientesUp extends javax.swing.JPanel {
-
-    ControladorCliente objControladorCliente = new ControladorCliente();
+    ControladorMotorizado objControladorMotorizado = new ControladorMotorizado();
     boolean isEdition = false;
-    Cliente clienteEdicion;
+    Motorizado motorizadoEdicion;
 
-    public ClientesUp() {
+    public MotorizadosUp() {
         initComponents();
         InitStyles();
-
     }
-    
-    public ClientesUp(Cliente objCliente) {
+
+    public MotorizadosUp(Motorizado objMotorizado) {
         initComponents();
         isEdition = true;
-        clienteEdicion = objCliente;
+        motorizadoEdicion = objMotorizado;
         InitStyles();
     }
 
     private void InitStyles() {
         title.putClientProperty("FlatLaf.styleClass", "h1");
         title.setForeground(Color.black);
-        txtNombre.putClientProperty("JTextField.placeholderText", "Ingrese el nombre del cliente.");
-        txtDni.putClientProperty("JTextField.placeholderText", "Ingrese el dni del cliente.");
-        txtTelefono.putClientProperty("JTextField.placeholderText", "Ingrese el telefono del cliente.");
-        txtDomicilio.putClientProperty("JTextField.placeholderText", "Ingrese el domicilio del cliente.");
-        
+        txtNombre.putClientProperty("JTextField.placeholderText", "Ingrese el nombre del motorizado.");
+        txtDni.putClientProperty("JTextField.placeholderText", "Ingrese el dni del motorizado.");
+        txtTelefono.putClientProperty("JTextField.placeholderText", "Ingrese el telefono del motorizado.");
+        chbxActivo.putClientProperty("JTextField.placeholderText", "Ingrese el estado del motorizado.");
+
         if (isEdition) {
-            title.setText("Editar Cliente");
+            title.setText("Editar motorizado");
             btnRegistrar.setText("Guardar");
 
-            if (clienteEdicion != null) {
-                txtNombre.setText(clienteEdicion.getNombre());
-                txtDni.setText(clienteEdicion.getDni());
-                txtTelefono.setText(clienteEdicion.getTelefono());
-                txtDomicilio.setText(clienteEdicion.getDireccion());
+            if (motorizadoEdicion != null) {
+                txtNombre.setText(motorizadoEdicion.getNombre());
+                txtDni.setText(motorizadoEdicion.getDni());
+                txtTelefono.setText(motorizadoEdicion.getTelefono());
+                chbxActivo.setSelected(motorizadoEdicion.isActivo());
             }
         }
     }
@@ -50,6 +47,7 @@ public class ClientesUp extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         bg = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
         nameLbl = new javax.swing.JLabel();
@@ -60,14 +58,16 @@ public class ClientesUp extends javax.swing.JPanel {
         txtTelefono = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         domLbl = new javax.swing.JLabel();
-        txtDomicilio = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
+        chbxActivo = new javax.swing.JCheckBox();
 
-        setPreferredSize(new java.awt.Dimension(750, 430));
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(750, 430));
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
 
-        title.setText("Registrar nuevo Cliente");
+        title.setText("Registrar nuevo Motorizado");
 
         nameLbl.setText("Nombres");
 
@@ -79,9 +79,7 @@ public class ClientesUp extends javax.swing.JPanel {
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jSeparator1.setPreferredSize(new java.awt.Dimension(200, 10));
 
-        domLbl.setText("Domicilio");
-
-        txtDomicilio.setToolTipText("");
+        domLbl.setText("Activo");
 
         btnRegistrar.setBackground(new java.awt.Color(18, 90, 173));
         btnRegistrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -120,11 +118,11 @@ public class ClientesUp extends javax.swing.JPanel {
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(70, 70, 70)
                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDomicilio)
                             .addGroup(bgLayout.createSequentialGroup()
                                 .addComponent(domLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(220, 220, 220))
-                            .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(chbxActivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(72, 72, 72))
                     .addGroup(bgLayout.createSequentialGroup()
                         .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -155,8 +153,8 @@ public class ClientesUp extends javax.swing.JPanel {
                             .addGroup(bgLayout.createSequentialGroup()
                                 .addComponent(domLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(117, 117, 117)
+                                .addComponent(chbxActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(121, 121, 121)
                                 .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(164, 164, 164))
                     .addGroup(bgLayout.createSequentialGroup()
@@ -164,66 +162,124 @@ public class ClientesUp extends javax.swing.JPanel {
                         .addGap(26, 26, 26))))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 750, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 430, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         String nombre = txtNombre.getText();
         String dni = txtDni.getText();
         String telefono = txtTelefono.getText();
-        String domicilio = txtDomicilio.getText();
+        boolean activo = chbxActivo.isSelected();
 
-        Cliente objCliente = isEdition ? clienteEdicion : new Cliente();
-        objCliente.setNombre(nombre);
-        objCliente.setDni(dni);
-        objCliente.setTelefono(telefono);
-        objCliente.setDireccion(domicilio);
+        Motorizado objMotorizado = isEdition ? motorizadoEdicion : new Motorizado();
+        objMotorizado.setNombre(nombre);
+        objMotorizado.setDni(dni);
+        objMotorizado.setTelefono(telefono);
+        objMotorizado.setActivo(activo);
 
         try {
             if (!isEdition) {
-                objControladorCliente.registrarCliente(objCliente);
+                objControladorMotorizado.registrarMotorizado(objMotorizado);
             } else {
-                objControladorCliente.editarCliente(objCliente);
+                objControladorMotorizado.editarMotorizado(objMotorizado);
             }
 
             String successMsg = isEdition ? "modificado" : "registrado";
 
-            javax.swing.JOptionPane.showMessageDialog(this, "Cliente " + successMsg + " exitosamente.\n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Motorizado " + successMsg + " exitosamente.\n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
             if (!isEdition) {
                 txtNombre.setText("");
                 txtDni.setText("");
                 txtTelefono.setText("");
-                txtDomicilio.setText("");
+                chbxActivo.setText("");
             }
         } catch (Exception e) {
             String errorMsg = isEdition ? "modificar" : "registrar";
-            javax.swing.JOptionPane.showMessageDialog(this, "Ocurrió un error al " + errorMsg + " el cliente. \n", "AVISO", javax.swing.JOptionPane.ERROR_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Ocurrió un error al " + errorMsg + " el motorizado. \n", "AVISO", javax.swing.JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MotorizadosUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MotorizadosUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MotorizadosUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MotorizadosUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MotorizadosUp().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel apMLbl;
     private javax.swing.JLabel apPLbl;
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JCheckBox chbxActivo;
     private javax.swing.JLabel domLbl;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel nameLbl;
     private javax.swing.JLabel title;
     private javax.swing.JTextField txtDni;
-    private javax.swing.JTextField txtDomicilio;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables

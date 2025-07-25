@@ -34,7 +34,7 @@ public class VistaGestionComanda extends javax.swing.JFrame {
 
         cargarClientes();
         cargarRestaurantes();
-        cargarTabla();
+        //cargarTabla();
 
     }
 
@@ -49,7 +49,7 @@ public class VistaGestionComanda extends javax.swing.JFrame {
     }
 
     private void cargarRestaurantes() {
-        RestauranteDAO dao = new RestauranteDAO();
+       /* RestauranteDAO dao = new RestauranteDAO();
         List<Restaurante> lista = dao.obtenerTodos();
         cbxRestaurante.removeAllItems();
         cbxRestaurante.addItem(null);
@@ -95,7 +95,7 @@ public class VistaGestionComanda extends javax.swing.JFrame {
         tablaComandas.getColumnModel().getColumn(4).setWidth(100);
         tablaComandas.getColumnModel().getColumn(0).setMinWidth(40);
         tablaComandas.getColumnModel().getColumn(0).setMaxWidth(40);
-        tablaComandas.getColumnModel().getColumn(0).setWidth(40);
+        tablaComandas.getColumnModel().getColumn(0).setWidth(40);*/
     }
 
     private int obtenerIdComandaDesdeFila(int fila) {
@@ -257,7 +257,7 @@ public class VistaGestionComanda extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        Cliente cliente = (Cliente) cbxCliente.getSelectedItem();
+       /* Cliente cliente = (Cliente) cbxCliente.getSelectedItem();
         System.out.println("🟡 ID del cliente seleccionado: " + cliente.getId());
         Restaurante restaurante = (Restaurante) cbxRestaurante.getSelectedItem();
         boolean requiereCompra = cbxRequiereCompra.isSelected();
@@ -295,12 +295,12 @@ public class VistaGestionComanda extends javax.swing.JFrame {
         cbxRequiereCompra.setSelected(false);
         cbxCliente.setSelectedIndex(0);
         cbxRestaurante.setSelectedIndex(0);
-
+*/
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        int fila = tablaComandas.getSelectedRow();
+    /*    int fila = tablaComandas.getSelectedRow();
 
         if (fila == -1) {
             JOptionPane.showMessageDialog(this, "⚠ Selecciona una comanda para eliminar.");
@@ -320,7 +320,7 @@ public class VistaGestionComanda extends javax.swing.JFrame {
         if (confirm != JOptionPane.YES_OPTION) {
             return;
         }
-
+*/
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed

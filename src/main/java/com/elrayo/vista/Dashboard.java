@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
@@ -328,11 +329,19 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_clientesActionPerformed
 
     private void btn_motorizadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_motorizadosActionPerformed
-        ShowJPanel(new Motorizados());
+        try {
+            ShowJPanel(new Motorizados());
+        } catch (Exception ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_motorizadosActionPerformed
 
     private void btn_restaurantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_restaurantesActionPerformed
-        ShowJPanel(new Restaurantes());
+        try {
+            ShowJPanel(new Restaurantes());
+        } catch (Exception ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_restaurantesActionPerformed
 
     private void btn_pedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pedidosActionPerformed

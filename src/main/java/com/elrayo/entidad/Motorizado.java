@@ -7,23 +7,41 @@ public class Motorizado extends Persona implements IReportable {
     private String dni;
     private boolean activo;
 
-    public Motorizado() {}
+    public Motorizado() {
+    }
 
     public Motorizado(String dni, boolean activo, String nombre, String telefono) {
         super(nombre, telefono);
         this.dni = dni;
         this.activo = activo;
     }
-    
-    public String getDni() { return dni; }
-    public void setDni(String dni) { this.dni = dni; }
-    public boolean isActivo() { return activo; }
-    public void setActivo(boolean activo) { this.activo = activo; }
 
+    public int getIdMotorizado() {
+        return idMotorizado;
+    }
+
+    public void setIdMotorizado(int idMotorizado) {
+        this.idMotorizado = idMotorizado;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+    
     @Override
     public String generarReporte() {
         return "Reporte del motorizado: " + this.nombre;
     }
-
-
 }

@@ -17,7 +17,7 @@ public class VistaGestionMotorizado extends javax.swing.JFrame {
 
     public void cargarTabla() {
         
-        List<Motorizado> lista = objControladorMotorizado.mostrarMotorizados();
+        /*List<Motorizado> lista = objControladorMotorizado.mostrarMotorizados();
 
         DefaultTableModel modelo = new DefaultTableModel(
                 new String[]{"Nombre", "Teléfono", "DNI", "Activo"}, 0
@@ -38,7 +38,7 @@ public class VistaGestionMotorizado extends javax.swing.JFrame {
             modelo.addRow(fila);
         }
 
-        TablaMotorizado.setModel(modelo);
+        TablaMotorizado.setModel(modelo);*/
     }
 
     @SuppressWarnings("unchecked")
@@ -192,7 +192,7 @@ public class VistaGestionMotorizado extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        int fila = TablaMotorizado.getSelectedRow();
+        /*int fila = TablaMotorizado.getSelectedRow();
 
         if (fila == -1) {
             JOptionPane.showMessageDialog(this, "⚠ Selecciona un motorizado para eliminar.");
@@ -220,11 +220,11 @@ public class VistaGestionMotorizado extends javax.swing.JFrame {
         }
         objControladorMotorizado.mostrarMotorizados();
         
-
+*/
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // Detectar fila
+      /*  // Detectar fila
         int fila = TablaMotorizado.getSelectedRow();
         if (fila == -1) {
             JOptionPane.showMessageDialog(this, "⚠ Selecciona una fila para editar.");
@@ -249,7 +249,7 @@ public class VistaGestionMotorizado extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "❌ Error al actualizar motorizado.");
         }
-
+*/
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void TablaMotorizadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMotorizadoMouseClicked
